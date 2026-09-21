@@ -1,5 +1,5 @@
 #include <iostream>
-int main(){
+int main()
+{
 	std::cout<<"kayumov.dima\n";
-	return 0;
 }
