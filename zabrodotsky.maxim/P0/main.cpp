@@ -3,5 +3,5 @@
 
 int main()
 {
-    std::cout << "zabrodotsky.maxim\n";
+  std::cout << "zabrodotsky.maxim\n";
 }
