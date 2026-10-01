@@ -1,12 +1,19 @@
+#include <iostream>
 
-   #include <iostream>
+namespace sierra
+{
 
-   namespace sierra {
-   }
+void printStudentId()
+{
+  std::cout << "sierra.holman" << "\n";
+}
 
-   int main() {
-       std::cout << "sierra.holman" << std::endl;
-       return 0;
-   }
+}  // namespace sierra
+
+int main()
+{
+  sierra::printStudentId();
+  return 0;
+}
 
 
