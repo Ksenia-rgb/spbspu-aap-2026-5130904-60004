@@ -1,3 +1,6 @@
+#ifndef MAIN_CPP
+#define MAIN_CPP
+
 #include <iostream>
 
 namespace sierra
@@ -13,3 +16,5 @@ int main()
   sierra::printStudentId();
   return 0;
 }
+
+#endif
