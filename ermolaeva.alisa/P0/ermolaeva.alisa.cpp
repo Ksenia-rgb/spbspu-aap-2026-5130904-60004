@@ -2,6 +2,5 @@
 
 int main()
 {
-// :)))))))))
 std::cout<<"ermolaeva.alisa\n";
 }
