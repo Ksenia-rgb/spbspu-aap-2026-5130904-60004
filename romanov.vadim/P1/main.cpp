@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdexcept>
 #include <clocale>
 int localMaxNumber();
 int main()
@@ -7,7 +8,7 @@ int main()
   std::cout << "Введите последовательность чисел, 0 - конец ввода\n";
   try
   {
-    int res = localMaxNumber();
+    const int res = localMaxNumber();
     std::cout << res << "\n";
   }
   catch (std::invalid_argument &e)
@@ -25,13 +26,13 @@ int main()
 int localMaxNumber()
 {
   int third = 0, second = 0, first = 0;
-  int inputCount = 0, localMaxCount = 0;
+  int input_count = 0, local_max_count = 0;
   while (std::cin >> third && third != 0)
   {
-    inputCount++;
-    if (inputCount >= 3 && second > third && second > first)
+    input_count++;
+    if (input_count >= 3 && second > third && second > first)
     {
-      localMaxCount++;
+      local_max_count++;
     }
     first = second;
     second = third;
@@ -40,9 +41,9 @@ int localMaxNumber()
   {
     throw std::invalid_argument("Программа принимает только целые числа\n");
   }
-  if (inputCount == 0)
+  if (input_count == 0)
   {
-    throw std::logic_error("Слишшком мало значений\n");
+    throw std::logic_error("Слишком мало значений\n");
   }
-  return localMaxCount;
+  return local_max_count;
 }
