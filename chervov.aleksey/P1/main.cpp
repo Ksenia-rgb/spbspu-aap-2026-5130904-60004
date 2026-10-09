@@ -22,7 +22,7 @@ namespace chervov
         else
         {
           std::cout << count << "\n";
-	  return;
+          return;
         }
       }
 
