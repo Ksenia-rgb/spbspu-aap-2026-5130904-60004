@@ -1,13 +1,13 @@
 #include <iostream>
 #include <clocale>
-int LocalMaxNumber();
+int local_max_number();
 int main()
 {
   std::setlocale(LC_ALL, "Russian");
   std::cout << "Введите последовательность чисел, 0 - конец ввода, в последовательность не входит\n";
-  try 
+  try
   {
-    int res = LocalMaxNumber();
+    int res = local_max_number();
     std::cout << res << "\n";
   }
   catch (std::invalid_argument &e)
@@ -22,18 +22,17 @@ int main()
   }
   return 0;
 }
-int LocalMaxNumber()
+int local_max_number()
 {
   int third = 0, second = 0, first = 0;
-  int InputCount = 0, MaxNumber = 0;
+  int input_count = 0, local_max_count = 0;
   while (std::cin >> third && third != 0)
   {
-    InputCount++;
-    if (InputCount >= 3 && second > third && second > first)
+    input_count++;
+    if (input_count >= 3 && second > third && second > first)
     {
-      MaxNumber++;
-    }
-  
+      local_max_count++;
+    } 
     first = second;
     second = third;
   }
@@ -41,9 +40,9 @@ int LocalMaxNumber()
   {
     throw std::invalid_argument("Программа принимает только целые числа\n");
   }
-  if (InputCount < 3)
+  if (input_count== 0)
   {
-    throw std::logic_error("Подсчет количества локальных максимумов требует как минимум 3 числа\n");
+    throw std::logic_error("Слишшком мало значений\n");
   }
-  return MaxNumber;
+  return local_max_count;
 }
