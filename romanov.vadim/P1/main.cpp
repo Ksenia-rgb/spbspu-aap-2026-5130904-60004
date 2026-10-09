@@ -4,7 +4,7 @@ int local_max_number();
 int main()
 {
   std::setlocale(LC_ALL, "Russian");
-  std::cout << "Введите последовательность чисел, 0 - конец ввода, в последовательность не входит\n";
+  std::cout << "Введите последовательность чисел, 0 - конец ввода\n";
   try
   {
     int res = local_max_number();
@@ -32,7 +32,7 @@ int local_max_number()
     if (input_count >= 3 && second > third && second > first)
     {
       local_max_count++;
-    } 
+    }
     first = second;
     second = third;
   }
