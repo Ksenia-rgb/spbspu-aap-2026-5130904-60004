@@ -2,7 +2,7 @@
 
 namespace chervov
 {
-  int countSumOfPrevTwo()
+  void countSumOfPrevTwo()
   {
     const int MinSequenceLength = 3;
     int firstNumber = 0, secondNumber = 0, currentNumber = 0;
@@ -15,14 +15,13 @@ namespace chervov
       if (currentNumber == 0)
       {
         if (lengthSequence < MinSequenceLength)
-	{
-	  throw std::runtime_error("Lenght sequence short");
-	}
-	else
-	{
-	  std::cout << count << "\n";
-	  return 0;
-	}
+        {
+          throw std::runtime_error("Lenght sequence short");
+        }
+        else
+        {
+          std::cout << count << "\n";
+        }
       }
 
       lengthSequence++;
@@ -30,9 +29,9 @@ namespace chervov
       if (lengthSequence > 2)
       {
         if (firstNumber + secondNumber == currentNumber)
-	{
-	  count++;
-	}
+        {
+          count++;
+        }
       }
 
       firstNumber = secondNumber;
@@ -59,4 +58,5 @@ int main()
     std::cerr << e.what() << "\n";
     return 2;
   }
+  return 0;
 }
