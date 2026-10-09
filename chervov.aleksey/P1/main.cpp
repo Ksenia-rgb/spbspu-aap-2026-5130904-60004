@@ -1,41 +1,43 @@
 #include <iostream>
+#include <stdexcept>
 
 namespace chervov
 {
   void countSumOfPrevTwo()
   {
     const int MinSequenceLength = 3;
-    int firstNumber = 0, secondNumber = 0, currentNumber = 0;
-    int lengthSequence = 0;
+    int first_number = 0, second_number = 0, current_number = 0;
+    int length_sequence = 0;
 
     int count = 0;
 
-    while (std::cin >> currentNumber)
+    while (std::cin >> current_number)
     {
-      if (currentNumber == 0)
+      if (current_number == 0)
       {
-        if (lengthSequence < MinSequenceLength)
+        if (length_sequence < MinSequenceLength)
         {
           throw std::runtime_error("Lenght sequence short");
         }
         else
         {
           std::cout << count << "\n";
+	  return;
         }
       }
 
-      lengthSequence++;
+      length_sequence++;
 
-      if (lengthSequence > 2)
+      if (length_sequence > 2)
       {
-        if (firstNumber + secondNumber == currentNumber)
+        if (first_number + second_number == current_number)
         {
           count++;
         }
       }
 
-      firstNumber = secondNumber;
-      secondNumber = currentNumber;
+      first_number = second_number;
+      second_number = current_number;
     }
 
     throw std::invalid_argument("Invalid sequence number");
@@ -47,6 +49,7 @@ int main()
   try
   {
     chervov::countSumOfPrevTwo();
+    return 0;
   }
   catch (const std::invalid_argument &e)
   {
@@ -58,5 +61,4 @@ int main()
     std::cerr << e.what() << "\n";
     return 2;
   }
-  return 0;
 }
