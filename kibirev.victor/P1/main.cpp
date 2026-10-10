@@ -1,16 +1,17 @@
 #include <iostream>
+#include <stdexcept>
 namespace kibirev
 {
-  int PifTrip();
+  int pifTrip();
 }
 
 int main()
 {
   try
   {
-    return kibirev::PifTrip();
+    return kibirev::pifTrip();
   }
-  catch(const std::invalid_argument& e)
+  catch (const std::invalid_argument& e)
   {
     std::cerr << e.what() << "\n";
     return 1;
@@ -18,25 +19,25 @@ int main()
 }
 namespace kibirev
 {
-  int PifTrip()
+  int pifTrip()
   {
     int num = 0;
     int piftr = 0;
     int cntr = 0;
     bool bad = false;
     long long sum = 0;
-    if(!(std::cin >> num))
+    if (!(std::cin >> num ) )
     {
       throw std::invalid_argument("Not a number of int\n");
     }
-    while(num != 0)
+    while (num != 0)
     {
-      if(cntr < 2)
+      if (cntr < 2)
       {
-        if(num > 0)
+        if (num > 0)
         {
-          long long n = num;
-          sum += n*n;
+          const long long n = num;
+          sum += n * n;
         }
         else
         {
@@ -46,7 +47,7 @@ namespace kibirev
       }
       else
       {
-        if(!bad && num > 0 && sum == num*num)
+        if (!bad && num > 0 && sum == num * num)
         {
           piftr++;
         }
@@ -54,7 +55,7 @@ namespace kibirev
         sum = 0;
         bad = false;
       }
-      if(!(std::cin >> num))
+      if (!(std::cin >> num))
       {
         throw std::invalid_argument("Not a number of int\n");
       }
