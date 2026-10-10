@@ -26,7 +26,7 @@ namespace kibirev
     int cntr = 0;
     bool bad = false;
     long long sum = 0;
-    if (!(std::cin >> num ) )
+    if (!(std::cin >> num ))
     {
       throw std::invalid_argument("Not a number of int\n");
     }
