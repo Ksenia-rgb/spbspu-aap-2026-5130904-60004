@@ -11,7 +11,7 @@ int main()
 {
   try
   {
-    int result = semenets::countSignChanges();
+    const int result = semenets::countSignChanges();
     std::cout << result << "\n";
     return 0;
   }
