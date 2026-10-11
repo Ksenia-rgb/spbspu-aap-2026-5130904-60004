@@ -19,7 +19,9 @@ namespace dorofeev
       if (cur > 0 && x >= prev)
       {
         ++cur;
-      } else {
+      }
+      else
+      {
         cur = 1;
       }
       if (cur > best)
