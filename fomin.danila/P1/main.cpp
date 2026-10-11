@@ -1,5 +1,7 @@
 #include <iostream>
 #include <exception>
+#include <stdexcept>
+#include <cstdlib>
 namespace fomin
 {
   int func();
@@ -22,7 +24,7 @@ namespace fomin
 {
   int func()
   {
-    long int num;
+    long int num = 0;
     int len = 0;
     int max_len = 0;
     try
@@ -59,7 +61,7 @@ namespace fomin
     catch (std::exception& e)
     {
       std::cerr << e.what() << "\n";
-      exit(1);
+      std::exit(1);
     }
   }
 }
