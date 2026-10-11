@@ -23,7 +23,6 @@ namespace fomin
   int func()
   {
     long int num;
-    long int temp;
     int len = 0;
     int max_len = 0;
     try
@@ -32,7 +31,6 @@ namespace fomin
       {
         while (num != 0)
         {
-          temp = num;
           if (std::cin >> num)
           {
             if (num > 0)
