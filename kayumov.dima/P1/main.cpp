@@ -1,5 +1,5 @@
 #include <iostream>
-#include <stdexcept> // Для std::invalid_argument и std::runtime_error
+#include <stdexcept>
 
 namespace kayumov
 {
@@ -51,15 +51,15 @@ int main()
 
     return 0;
   }
-  catch (const std::invalid_argument& e) // Исправлено: std::invalid_argument (пропущена 'u')
+  catch (const std::invalid_argument& e)
   {
     std::cerr << e.what() << "\n";
 
     return 1;
   }
-  catch (const std::runtime_error& a) // Исправлено: std::runtime_error (был знак $)
+  catch (const std::runtime_error& a)
   {
-    std::cerr << a.what() << "\n"; // Исправлено: а.what() вместо e.what()
+    std::cerr << a.what() << "\n";
 
     return 2;
   }
