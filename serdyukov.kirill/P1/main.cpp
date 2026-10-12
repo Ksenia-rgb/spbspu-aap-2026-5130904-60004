@@ -34,7 +34,7 @@ int serdyukov::getGreatLess()
 
     previous = current;
     current = next;
-    
+
     if (!(std::cin >> next)) {
       throw std::invalid_argument("Incorrect input");
     }
