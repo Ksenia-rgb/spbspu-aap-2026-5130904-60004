@@ -7,14 +7,12 @@ namespace serdyukov {
 
 int main()
 {
-  try
-  {
+  try {
     const int great_less = serdyukov::getGreatLess();
     std::cout << great_less << '\n';
     return 0;
   }
-  catch (const std::invalid_argument &e)
-  {
+  catch (const std::invalid_argument& e) {
     std::cerr << e.what() << '\n';
     return 1;
   }
@@ -27,10 +25,11 @@ int serdyukov::getGreatLess()
   int previous = 0;
   int result = 0;
 
-  if (!(std::cin >> next))
+  if (!(std::cin >> next)) {
     throw std::invalid_argument("Incorrect input");
+  }
 
-  while (next!=0) {
+  while (next != 0) {
 
     previous = current;
     current = next;
