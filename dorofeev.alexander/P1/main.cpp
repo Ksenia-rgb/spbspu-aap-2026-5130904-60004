@@ -1,7 +1,6 @@
 #include <iostream>
 
-namespace dorofeev
-{
+namespace dorofeev {
   int maxMonoInt(bool & ok)
   {
     int x = 0;
@@ -11,29 +10,23 @@ namespace dorofeev
     bool first = true;
     ok = false;
 
-    while (std::cin >> x)
-    {
-      if (x == 0)
-      {
+    while (std::cin >> x) {
+      if (x == 0) {
         ok = true;
         break;
       }
-      if (!first && x >= prev)
-      {
+      if (!first && x >= prev) {
         cur++;
-      }
-      else
-      {
+      } else {
         cur = 1;
       }
-      if (cur > best)
-      {
+      if (cur > best) {
         best = cur;
       }
       prev = x;
       first = false;
     }
-  return best;
+    return best;
   }
 }
 
@@ -41,8 +34,7 @@ int main()
 {
   bool ok = false;
   const int result = dorofeev::maxMonoInt(ok);
-  if (!ok)
-  {
+  if (!ok) {
     std::cerr << "Error: input is not a valid sequence\n";
     return 1;
   }
