@@ -13,7 +13,7 @@ namespace dorofeev
 
     while (std::cin >> x)
     {
-      if (x = 0)
+      if (x == 0)
       {
         ok = true;
         break;
