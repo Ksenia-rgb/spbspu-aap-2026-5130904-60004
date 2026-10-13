@@ -58,7 +58,7 @@ namespace semenets
       }
       if (count_num != 1 && znak_new != znak_past)
       {
-        if (count == INT_MAX)
+        if (count_num == INT_MAX)
         {
           throw std::overflow_error("Error: sequence is too long");
         }
