@@ -40,7 +40,7 @@ namespace dorofeev
 int main()
 {
   bool ok = false;
-  int result = dorofeev::maxMonoInt(ok);
+  const int result = dorofeev::maxMonoInt(ok);
   if (!ok)
   {
     std::cerr << "Error: input is not a valid sequence\n";
