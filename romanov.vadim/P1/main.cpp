@@ -50,4 +50,4 @@ int romanov::localMaxNumber()
   }
   return local_max_count;
 }
-}
+
