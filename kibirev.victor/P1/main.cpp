@@ -9,8 +9,8 @@ int main()
 {
   try
   {
-    int Ans = kibirev::pifTrip();
-    std::cout << Ans << "\n";
+    const int ans = kibirev::pifTrip();
+    std::cout << ans << "\n";
   }
   catch (const std::invalid_argument& e)
   {
@@ -66,7 +66,7 @@ namespace kibirev
         throw std::invalid_argument("Not a number of int\n");
       }
     }
-    if(cntr != 0)
+    if (cntr != 0)
     {
       std::cerr << "Не полная последовательность.\n";
       return 2;
