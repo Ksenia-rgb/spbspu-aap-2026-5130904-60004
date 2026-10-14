@@ -1,67 +1,52 @@
-#include <iostream>
-#include <exception>
-#include <stdexcept>
 #include <cstdlib>
-namespace fomin
-{
-  int func();
+#include <exception>
+#include <iostream>
+#include <stdexcept>
+namespace fomin {
+int func();
 }
-int main()
-{
-  try
-  {
+int main() {
+  try{
     const int max_len_over_zero = fomin::func();
     std::cout << max_len_over_zero << "\n";
-    return 0;
-  }
-  catch (std::exception& e)
+    }
+  catch(const std::exception& e)
   {
     std::cerr << e.what() << "\n";
     return 1;
   }
 }
-namespace fomin
-{
-  int func()
+namespace fomin {
+int func() {
+  long int num = 0;
+  int len = 0;
+  int max_len = 0;
+  while(std::cin >> num)
   {
-    long int num = 0;
-    int len = 0;
-    int max_len = 0;
-    try
-    {
-      if (std::cin >> num)
-      {
-        while (num != 0)
-        {
-          if (std::cin >> num)
-          {
-            if (num > 0)
-            {
-              len += 1;
-            }
-            else
-            {
-              max_len = len;
-              len = 0;
-            }
-          }
-          else
-          {
-            throw std::runtime_error("Write not a integer");
-          }
-        }
-        return max_len;
-      }
-      else
-      {
-        throw std::runtime_error("Writed not a integer");
-      }
-      return max_len;
+    if (std::cin.peek() == '.' || std::cin.peek() == ',') {
+      throw std::runtime_error("Not an integer");
     }
-    catch (std::exception& e)
+    if (num == 0)
     {
-      std::cerr << e.what() << "\n";
-      std::exit(1);
+      if (max_len<len)
+      {
+        max_len = len;
+      }
+      return (max_len);
+    }
+    if(num % 2==0)
+    {
+      len++;
+    }
+    else
+    {
+      if (max_len < len)
+      {
+        max_len = len;
+      }
+      len = 0;
     }
   }
+  throw std::runtime_error("Writed not a int");
 }
+} // namespace fomin
