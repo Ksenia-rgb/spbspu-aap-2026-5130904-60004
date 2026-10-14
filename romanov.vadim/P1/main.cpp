@@ -1,9 +1,8 @@
 #include <iostream>
 #include <stdexcept>
 #include <clocale>
-namespace romanov
-{
-int localMaxNumber();
+namespace romanov {
+ int localMaxNumber();
 }
 int main()
 {
