@@ -49,4 +49,4 @@ int func() {
   }
   throw std::runtime_error("Writed not a int");
 }
-} // namespace fomin
+}
