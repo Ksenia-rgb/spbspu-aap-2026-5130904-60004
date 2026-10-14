@@ -24,7 +24,7 @@ int func() {
   while(std::cin >> num)
   {
     if (std::cin.peek() == '.' || std::cin.peek() == ',') {
-      throw std::runtime_error("Not an integer \n");
+      throw std::runtime_error("Not an integer");
     }
     if (num == 0)
     {
@@ -47,6 +47,6 @@ int func() {
       len = 0;
     }
   }
-  throw std::runtime_error("Writed not a int \n");
+  throw std::runtime_error("Writed not a int");
 }
 } // namespace fomin
