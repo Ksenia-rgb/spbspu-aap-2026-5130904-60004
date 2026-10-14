@@ -58,12 +58,6 @@ namespace alekseev
             return 2;
         }
 
-        if (max1 == max2 && count == 1)
-        {
-            std::cerr << "The second maximum cannot be found" << std::endl;
-            return 2;
-        }
-
         std::cout << max2 << std::endl;
         return 0;
     }
