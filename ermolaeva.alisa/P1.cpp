@@ -1,15 +1,17 @@
 #include <iostream>
-#include <clocale>
 #include <stdexcept>
 
-int locMaxNum();
+namespace ermolaeva
+{
+  int locMaxNum();
+}
+
 int main()
 {
-  std::setlocale(LC_ALL, "RU");
-  std::cout<< "Введите последовательность чисел\n";
+  std::cout<< "Введите последовательность чисел, 0 - конец последовательности\n";
   try
   {
-    const int result=locMaxNum();
+    const int result=ermolaeva::locMaxNum();
     std::cout<< result <<"\n";
   }
   catch (const std::invalid_argument &e)
@@ -25,7 +27,7 @@ int main()
   return 0;
 }
 
-int locMaxNum()
+int ermolaeva::locMaxNum()
 {
   int first=0, second=0, third=0;
   int input_count=0, locmaxcount=0;
@@ -45,7 +47,7 @@ int locMaxNum()
   }
   if (input_count==0)
   {
-    throw std::logic_error("где последовательсность?");
+    throw std::logic_error("это не последовательность");
   }
   return locmaxcount;
 }
