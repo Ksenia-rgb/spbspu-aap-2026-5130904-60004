@@ -3,14 +3,14 @@
 
 namespace kayumov
 {
-  int max_chislo();
+  int maxChislo();
 }
 
 int main()
 {
   try
   {
-    const int result = kayumov::max_chislo();
+    const int result = kayumov::maxChislo();
 
     std::cout << result << "\n";
 
@@ -32,7 +32,7 @@ int main()
 
 namespace kayumov
 {
-  int max_chislo()
+  int maxChislo()
   {
     int longer = 0;
     int cnt = 0;
