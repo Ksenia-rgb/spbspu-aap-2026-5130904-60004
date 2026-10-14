@@ -26,9 +26,7 @@ int main()
   }
   return 0;
 }
-namespace romanov
-{
-int localMaxNumber()
+int romanov::localMaxNumber()
 {
   int third = 0, second = 0, first = 0;
   int input_count = 0, local_max_count = 0;
