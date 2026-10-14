@@ -20,11 +20,6 @@ int main()
     std::cerr << e.what() << "\n";
     return 1;
   }
-  catch (const std::overflow_error& e)
-  {
-    std::cerr << e.what() << "\n";
-    return 2;
-  }
 }
 
 namespace semenets
@@ -46,10 +41,6 @@ namespace semenets
       if (num == 0)
       {
         break;
-      }
-      if (count_num == INT_MAX)
-      {
-        throw std::overflow_error("Error: sequence is too long");
       }
       ++count_num;
       if (num > 0)
