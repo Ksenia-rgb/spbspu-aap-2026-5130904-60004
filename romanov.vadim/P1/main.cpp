@@ -28,28 +28,28 @@ int main()
 }
 namespace romanov
 {
-  int localMaxNumber()
+int localMaxNumber()
+{
+  int third = 0, second = 0, first = 0;
+  int input_count = 0, local_max_count = 0;
+  while (std::cin >> third && third != 0)
   {
-    int third = 0, second = 0, first = 0;
-    int input_count = 0, local_max_count = 0;
-    while (std::cin >> third && third != 0)
+    input_count++;
+    if (input_count >= 3 && second > third && second > first)
     {
-      input_count++;
-      if (input_count >= 3 && second > third && second > first)
-      {
-        local_max_count++;
-      }
-      first = second;
-      second = third;
+      local_max_count++;
     }
-    if (std::cin.fail())
-    {
-      throw std::invalid_argument("Программа принимает только целые числа\n");
-    }
-    if (input_count == 0)
-    {
-      throw std::logic_error("Слишком мало значений\n");
-    }
-    return local_max_count;
+    first = second;
+    second = third;
   }
+  if (std::cin.fail())
+  {
+    throw std::invalid_argument("Программа принимает только целые числа\n");
+  }
+  if (input_count == 0)
+  {
+    throw std::logic_error("Слишком мало значений\n");
+  }
+  return local_max_count;
+}
 }
