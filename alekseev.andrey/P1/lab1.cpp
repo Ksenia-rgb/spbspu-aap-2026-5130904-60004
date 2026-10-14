@@ -41,12 +41,12 @@ namespace alekseev
 
       if (x > max1)
       {
-        max2 = max1;  
-        max1 = x;     
+        max2 = max1;
+        max1 = x;
       }
       else if (count == 2 || (x > max2 && x < max1))
       {
-        max2 = x;     
+        max2 = x;
       }
     }
 
