@@ -13,13 +13,13 @@ namespace alekseev
 
         if (!(std::cin >> x))
         {
-            std::cerr << "Данные нельзя идентифицировать как последовательность" << std::endl;
+            std::cerr << "Input is not a sequence" << std::endl;
             return 1;
         }
 
         if (x == 0)
         {
-            std::cerr << "Последовательность слишком коротка" << std::endl;
+            std::cerr << "Sequence is too short" << std::endl;
             return 2;
         }
 
@@ -30,7 +30,7 @@ namespace alekseev
         {
             if (!(std::cin >> x))
             {
-                std::cerr << "Данные нельзя идентифицировать как последовательность" << std::endl;
+                std::cerr << "The data cannot be identified as a sequence" << std::endl;
                 return 1;
             }
 
@@ -54,13 +54,13 @@ namespace alekseev
 
         if (count < 2)
         {
-            std::cerr << "Нельзя найти второй максимум" << std::endl;
+            std::cerr << "The second maximum cannot be found" << std::endl;
             return 2;
         }
 
         if (max1 == max2 && count == 1)
         {
-            std::cerr << "Нельзя найти второй максимум" << std::endl;
+            std::cerr << "The second maximum cannot be found" << std::endl;
             return 2;
         }
 
