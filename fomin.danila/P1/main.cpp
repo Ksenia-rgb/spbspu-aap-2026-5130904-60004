@@ -2,51 +2,57 @@
 #include <exception>
 #include <iostream>
 #include <stdexcept>
-namespace fomin {
-int func();
+namespace fomin
+{
+  int func();
 }
-int main() {
-  try{
+int main()
+{
+  try
+  {
     const int max_len_over_zero = fomin::func();
     std::cout << max_len_over_zero << "\n";
-    }
-  catch(const std::exception& e)
+  }
+  catch (const std::exception &e)
   {
     std::cerr << e.what() << "\n";
     return 1;
   }
 }
-namespace fomin {
-int func() {
-  long int num = 0;
-  int len = 0;
-  int max_len = 0;
-  while(std::cin >> num)
+namespace fomin
+{
+  int func()
   {
-    if (std::cin.peek() == '.' || std::cin.peek() == ',') {
-      throw std::runtime_error("Not an integer");
-    }
-    if (num == 0)
+    long int num = 0;
+    int len = 0;
+    int max_len = 0;
+    while (std::cin >> num)
     {
-      if (max_len<len)
+      if (std::cin.peek() == '.' || std::cin.peek() == ',')
       {
-        max_len = len;
+        throw std::runtime_error("Not an integer");
       }
-      return (max_len);
-    }
-    if(num % 2==0)
-    {
-      len++;
-    }
-    else
-    {
-      if (max_len < len)
+      if (num == 0)
       {
-        max_len = len;
+        if (max_len < len)
+        {
+          max_len = len;
+        }
+        return (max_len);
       }
-      len = 0;
+      if (num % 2 == 0)
+      {
+        len++;
+      }
+      else
+      {
+        if (max_len < len)
+        {
+          max_len = len;
+        }
+        len = 0;
+      }
     }
+    throw std::runtime_error("Writed not a int");
   }
-  throw std::runtime_error("Writed not a int");
-}
 }
