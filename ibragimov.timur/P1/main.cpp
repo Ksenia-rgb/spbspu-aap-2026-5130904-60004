@@ -6,7 +6,7 @@ namespace ibragimov {
 int main()
 {
   try {
-    std::cerr << ibragimov::divRem() << std::endl;
+    std::cout << ibragimov::divRem() << std::endl;
     return 0;
   } catch (const std::invalid_argument& e) {
     std::cerr << e.what() << std::endl;
