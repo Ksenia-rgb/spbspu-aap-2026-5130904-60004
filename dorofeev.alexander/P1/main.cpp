@@ -1,19 +1,18 @@
 #include <iostream>
+#include <stdexcept>
 
 namespace dorofeev {
-  int maxMonoInt(bool & ok)
+  int maxMonoInt()
   {
     int x = 0;
     int prev = 0;
     int cur = 0;
     int best = 0;
     bool first = true;
-    ok = false;
 
     while (std::cin >> x) {
       if (x == 0) {
-        ok = true;
-        break;
+        return best;
       }
       if (!first && x >= prev) {
         cur++;
@@ -26,18 +25,18 @@ namespace dorofeev {
       prev = x;
       first = false;
     }
-    return best;
+    throw std::invalid_argument("input is not a valid sequence");
   }
 }
 
 int main()
 {
-  bool ok = false;
-  const int result = dorofeev::maxMonoInt(ok);
-  if (!ok) {
-    std::cerr << "Error: input is not a valid sequence\n";
+  try {
+    const int result = dorofeev::maxMonoInt();
+    std::count << result << "\n";
+  } catch (const std::exception & e) {
+    std::cerr << "Error" << e.what() << "\n";
     return 1;
   }
-  std::cout << result << "\n";
   return 0;
 }
