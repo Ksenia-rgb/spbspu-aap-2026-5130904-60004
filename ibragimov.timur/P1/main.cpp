@@ -1,7 +1,6 @@
 #include <iostream>
 #include <stdexcept>
-namespace ibragimov
-{
+namespace ibragimov {
   int divRem();
 }
 int main()
@@ -18,8 +17,7 @@ int main()
   }
 }
 
-namespace ibragimov
-{
+namespace ibragimov {
   int divRem()
   {
     int k = 0;
