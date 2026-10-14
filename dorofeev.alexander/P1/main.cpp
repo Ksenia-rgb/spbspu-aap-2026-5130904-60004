@@ -33,7 +33,7 @@ int main()
 {
   try {
     const int result = dorofeev::maxMonoInt();
-    std::count << result << "\n";
+    std::cout << result << "\n";
   } catch (const std::exception & e) {
     std::cerr << "Error" << e.what() << "\n";
     return 1;
