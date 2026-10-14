@@ -1,5 +1,7 @@
 #include <iostream>
 
+
+
 namespace alekseev
 {
     int find_almost_max()
