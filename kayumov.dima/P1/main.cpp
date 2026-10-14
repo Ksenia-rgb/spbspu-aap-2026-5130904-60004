@@ -3,7 +3,36 @@
 
 namespace kayumov
 {
-  int maxchislo()
+  int max_chislo();
+}
+
+int main()
+{
+  try
+  {
+    const int result = kayumov::max_chislo();
+
+    std::cout << result << "\n";
+
+    return 0;
+  }
+  catch (const std::invalid_argument& e)
+  {
+    std::cerr << e.what() << "\n";
+
+    return 1;
+  }
+  catch (const std::runtime_error& a)
+  {
+    std::cerr << a.what() << "\n";
+
+    return 2;
+  }
+}
+
+namespace kayumov
+{
+  int max_chislo()
   {
     int longer = 0;
     int cnt = 0;
@@ -38,29 +67,5 @@ namespace kayumov
     }
 
     return cnt;
-  }
-}
-
-int main()
-{
-  try
-  {
-    const int result = kayumov::maxchislo();
-
-    std::cout << result << "\n";
-
-    return 0;
-  }
-  catch (const std::invalid_argument& e)
-  {
-    std::cerr << e.what() << "\n";
-
-    return 1;
-  }
-  catch (const std::runtime_error& a)
-  {
-    std::cerr << a.what() << "\n";
-
-    return 2;
   }
 }
