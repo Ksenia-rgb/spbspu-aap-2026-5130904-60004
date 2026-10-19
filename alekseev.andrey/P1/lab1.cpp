@@ -4,7 +4,7 @@
 
 namespace alekseev
 {
-    int find_almost_max()
+    int findAlmostMax()
     {
         int x = 0;
         int max1 = 0;
@@ -65,6 +65,6 @@ namespace alekseev
 
 int main()
 {
-    return alekseev::find_almost_max();
+    return alekseev::findAlmostMax();
 }
 
