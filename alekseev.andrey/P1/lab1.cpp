@@ -50,4 +50,6 @@ int findAlmostMax() {
 }
 }  // namespace alekseev
 
-int main() { return alekseev::findAlmostMax(); }
+int main() {
+  return alekseev::findAlmostMax();
+}
