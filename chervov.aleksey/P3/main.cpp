@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <stdexcept>
+#include <exception>
 
 namespace chervov
 {
@@ -21,7 +22,7 @@ namespace chervov
   int findColumnWithLongestSeries(const int *array, int rows, int columns)
   {
     int result = 0;
-    int maxCount = 0;
+    int max_count = 0;
     for (int i = 0; i < columns; ++i)
     {
       int count = 0;
@@ -35,9 +36,9 @@ namespace chervov
         {
           count = 0;
         }
-        if (count > maxCount)
+        if (count > max_count)
         {
-          maxCount = count;
+          max_count = count;
           result = i + 1;
         }
       }
@@ -48,14 +49,14 @@ namespace chervov
 
 int main(int argc, char *argv[])
 {
-  int *dynamicArray = nullptr;
+  int *dynamic_array = nullptr;
   try
   {
     if (argc != 4)
     {
       throw std::invalid_argument("Not correct arguments count");
     }
-    if (std::strcmp(argv[1], "1") != 1 && std::strcmp(argv[1], "2") != 0)
+    if (std::strcmp(argv[1], "1") != 0 && std::strcmp(argv[1], "2") != 0)
     {
       throw std::invalid_argument("Not correct first argument");
     }
@@ -71,17 +72,17 @@ int main(int argc, char *argv[])
     int result = 0;
     if (std::strcmp(argv[1], "1") == 0)
     {
-      int fixedArray[chervov::maxSizeFixedArray] = {};
-      chervov::readMatrix(input, fixedArray, rows, columns);
-      result = chervov::findColumnWithLongestSeries(fixedArray, rows, columns);
+      int fixed_array[chervov::maxSizeFixedArray] = {};
+      chervov::readMatrix(input, fixed_array, rows, columns);
+      result = chervov::findColumnWithLongestSeries(fixed_array, rows, columns);
     }
     else
     {
-      dynamicArray = new int[rows * columns]{};
-      chervov::readMatrix(input, dynamicArray, rows, columns);
-      result = chervov::findColumnWithLongestSeries(dynamicArray, rows, columns);
-      delete [] dynamicArray;
-      dynamicArray = nullptr;
+      dynamic_array = new int[rows * columns]{};
+      chervov::readMatrix(input, dynamic_array, rows, columns);
+      result = chervov::findColumnWithLongestSeries(dynamic_array, rows, columns);
+      delete[] dynamic_array;
+      dynamic_array = nullptr;
     }
 
     std::ofstream output(argv[3]);
@@ -94,13 +95,13 @@ int main(int argc, char *argv[])
   catch (const std::invalid_argument &e)
   {
     std::cerr << e.what() << "\n";
-    delete [] dynamicArray;
+    delete[] dynamic_array;
     return 1;
   }
   catch (const std::exception &e)
   {
     std::cerr << e.what() << "\n";
-    delete [] dynamicArray;
+    delete[] dynamic_array;
     return 2;
   }
 }
