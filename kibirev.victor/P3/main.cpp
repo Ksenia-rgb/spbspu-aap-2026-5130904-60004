@@ -37,6 +37,8 @@ int main(int argc, char **argv)
     return 2;
   }
   int *arr = nullptr;
+  int *arrd = nullptr;
+  int fix_arr[Max_Size];
   size_t n = 0, m = 0;
   if (!(input >> n)) {
     std::cerr << "Не удалось прочитать n.\n";
