@@ -6,7 +6,7 @@ const int max_elements = 10000;
 
 namespace semenets
 {
-  void spiralDecrease(int* a, long long n, long long m);
+  void spiralDecrease(int* a, int n, int m);
 }
 
 int main(int argc, char* argv[])
@@ -32,8 +32,8 @@ int main(int argc, char* argv[])
   }
 
   std::ifstream input(argv[2]);
-  long long n = 0;
-  long long m = 0;
+  int n = 0;
+  int m = 0;
   if (!(input) || !(input>>n) || !(input>>m))
   {
     std::cerr << "Wrong input fail\n";
@@ -44,7 +44,8 @@ int main(int argc, char* argv[])
     std::cerr << "Rows and cols do not be < 0\n";
     return 2;
   }
-  const long long total = n * m;
+  long long total = n;
+  total = total * m;
   int fixed_array[max_elements];
   int* a = nullptr;
   int* arr = nullptr;
@@ -64,7 +65,7 @@ int main(int argc, char* argv[])
       arr = new int[total];
       a = arr;
     }
-    catch (const std::bad_alloc& e)
+    catch (const std::bad_alloc&)
     {
       std::cerr << "Not enough memory\n";
       return 2;
@@ -106,22 +107,22 @@ int main(int argc, char* argv[])
 
 namespace semenets
 {
-  void spiralDecrease(int* a, long long n, long long m)
+  void spiralDecrease(int* a, int n, int m)
   {
-    long long i = 0;
-    long long i1 = n - 1;
-    long long j = 0;
-    long long j1 = m - 1;
-    long long z = 1;
+    int i = 0;
+    int i1 = n - 1;
+    int j = 0;
+    int j1 = m - 1;
+    int z = 1;
     while (i <= i1 && j <= j1)
     {
-      for (long long k = j; k <= j1; k++)
+      for (int k = j; k <= j1; k++)
       {
         a[i * m + k] -= z;
         ++z;
       }
       ++i;
-      for (long long p = i; p <= i1; p++)
+      for (int p = i; p <= i1; p++)
       {
         a[p * m + j1] -= z;
         ++z;
@@ -129,7 +130,7 @@ namespace semenets
       --j1;
       if (i <= i1)
       {
-        for (long long l = j1; l >= j; l--)
+        for (int l = j1; l >= j; l--)
         {
           a[i1 * m + l] -= z;
           ++z;
@@ -138,7 +139,7 @@ namespace semenets
       }
       if (j <= j1)
       {
-        for (long long q = i1; q >= i; q--)
+        for (int q = i1; q >= i; q--)
         {
           a[q * m + j] -= z;
           ++z;
