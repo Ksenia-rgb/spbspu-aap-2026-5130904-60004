@@ -34,7 +34,7 @@ int main(int argc, char* argv[])
   std::ifstream input(argv[2]);
   int n = 0;
   int m = 0;
-  if (!(input) || !(input>>n) || !(input>>m))
+  if (!(input) || !(input >> n) || !(input >> m))
   {
     std::cerr << "Wrong input fail\n";
     return 2;
@@ -71,7 +71,8 @@ int main(int argc, char* argv[])
       return 2;
     }
   }
-  for (long long i = 0; i < total; i++) {
+  for (long long i = 0; i < total; i++)
+  {
     if (!(input >> a[i]))
     {
       std::cerr << "Wrong element matrix\n";
@@ -99,7 +100,8 @@ int main(int argc, char* argv[])
     output << " " << a[i];
   }
   output << std::endl;
-  if (num == 2) {
+  if (num == 2)
+  {
     delete[] arr;
   }
   return 0;
