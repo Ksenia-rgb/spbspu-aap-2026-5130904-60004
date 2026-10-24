@@ -1,12 +1,12 @@
 #include <iostream>
 #include <fstream>
 #include <new>
- 
+
 namespace semenets
-{
+}
   void SpiralDecrease(int* a, int n, int m);
 }
- 
+
 int main(int argc, char* argv[])
 {
   if (argc != 4)
@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
     std::cerr << "Error: first parameter not a number 1 or 2\n";
     return 1;
   }
- 
+
   std::ifstream input(argv[2]);
   long long n = 0;
   long long m = 0;
@@ -101,9 +101,10 @@ int main(int argc, char* argv[])
   }
   return 0;
 }
+
 namespace semenets
 {
-  void SpiralDecrease(int* a, int n, int m)
+  void SpiralDecrease(int* a, long long n, long long m)
   {
     int i = 0;
     int i1 = n - 1;
