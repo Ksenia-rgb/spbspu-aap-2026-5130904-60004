@@ -2,8 +2,9 @@
 #include <cstddef>
 #include <fstream>
 #include <cstdint>
+#include <new>
 namespace kibirev {
-  int Max_Sum_Mdg(const int *arr, size_t n, size_t m);
+  int maxSumMdg(const int *arr, size_t n, size_t m);
 }
 const size_t Max_Size = 10000;
 int main(int argc, char **argv)
@@ -30,7 +31,7 @@ int main(int argc, char **argv)
     std::cerr << "First parameter is out of range.\n";
     return 1;
   }
-  int type_arr = argv[1][0] - '0';
+  const int type_arr = argv[1][0] - '0';
   std::ifstream input(argv[2]);
   if (!input) {
     std::cerr << "Входной файл не открылся.\n";
@@ -78,7 +79,7 @@ int main(int argc, char **argv)
       return 2;
     }
   }
-  int res = kibirev::Max_Sum_Mdg(arr, n, m);
+  const int res = kibirev::maxSumMdg(arr, n, m);
   std::ofstream output(argv[3]);
   if (!output) {
     delete[] arrd;
@@ -91,12 +92,12 @@ int main(int argc, char **argv)
 }
 
 namespace kibirev {
-  int Max_Sum_Mdg(const int *arr, size_t n, size_t m)
+  int maxSumMdg(const int *arr, size_t n, size_t m)
   {
     if (n < 2 || m < 2) {
       return 0;
     }
-    size_t size = (n < m ? n : m);
+    const size_t size = (n < m ? n : m);
     int max = arr[0];
     for (size_t d = 0; d < 2 * size - 1; d++) {
       if (d == size - 1) {
