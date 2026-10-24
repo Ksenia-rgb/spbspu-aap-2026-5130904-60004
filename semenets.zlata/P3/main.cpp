@@ -2,9 +2,11 @@
 #include <fstream>
 #include <new>
 
+const int max_elements = 10000;
+
 namespace semenets
 {
-  void SpiralDecrease(int* a, long long n, long long m);
+  void spiralDecrease(int* a, long long n, long long m);
 }
 
 int main(int argc, char* argv[])
@@ -42,13 +44,13 @@ int main(int argc, char* argv[])
     std::cerr << "Rows and cols do not be < 0\n";
     return 2;
   }
-  long long total = n * m;
-  int fixed_array[10000];
+  const long long total = n * m;
+  int fixed_array[max_elements];
   int* a = nullptr;
   int* arr = nullptr;
   if (num == 1)
   {
-    if (total > 10000)
+    if (total > max_elements)
     {
       std::cerr << "Too many elements\n";
       return 2;
@@ -79,7 +81,7 @@ int main(int argc, char* argv[])
       return 2;
     }
   }
-  semenets::SpiralDecrease(a, n, m);
+  semenets::spiralDecrease(a, n, m);
   std::ofstream output(argv[3]);
   if (!output)
   {
@@ -104,22 +106,22 @@ int main(int argc, char* argv[])
 
 namespace semenets
 {
-  void SpiralDecrease(int* a, long long n, long long m)
+  void spiralDecrease(int* a, long long n, long long m)
   {
-    int i = 0;
-    int i1 = n - 1;
-    int j = 0;
-    int j1 = m - 1;
-    int z = 1;
+    long long i = 0;
+    long long i1 = n - 1;
+    long long j = 0;
+    long long j1 = m - 1;
+    long long z = 1;
     while (i <= i1 && j <= j1)
     {
-      for (int k = j; k <= j1; k++)
+      for (long long k = j; k <= j1; k++)
       {
         a[i * m + k] -= z;
         ++z;
       }
       ++i;
-      for (int p = i; p <= i1; p++)
+      for (long long p = i; p <= i1; p++)
       {
         a[p * m + j1] -= z;
         ++z;
@@ -127,7 +129,7 @@ namespace semenets
       --j1;
       if (i <= i1)
       {
-        for (int l = j1; l >= j; l--)
+        for (long long l = j1; l >= j; l--)
         {
           a[i1 * m + l] -= z;
           ++z;
@@ -136,7 +138,7 @@ namespace semenets
       }
       if (j <= j1)
       {
-        for (int q = i1; q >= i; q--)
+        for (long long q = i1; q >= i; q--)
         {
           a[q * m + j] -= z;
           ++z;
