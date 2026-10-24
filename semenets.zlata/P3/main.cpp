@@ -1,7 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include <new>
- 
+#include <new> 
 namespace semenets
 {
   void SpiralDecrease(int* a, int n, int m);
