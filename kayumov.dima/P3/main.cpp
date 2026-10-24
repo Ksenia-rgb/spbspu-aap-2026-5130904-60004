@@ -15,39 +15,39 @@ namespace kayumov
       return 0;
     }
 
-    std::size_t bestRow = 0;
-    std::size_t maxGlobalStreak = 0;
+    std::size_t best_row = 0;
+    std::size_t max_global_streak = 0;
 
     for (std::size_t i = 0; i < rows; ++i)
     {
-      std::size_t currentStreak = 1;
-      std::size_t rowMaxStreak = 1;
+      std::size_t current_streak = 1;
+      std::size_t row_max_streak = 1;
 
       for (std::size_t j = 1; j < cols; ++j)
       {
         if (matrix[(i * cols) + j] == matrix[(i * cols) + j - 1])
         {
-          ++currentStreak;
+          ++current_streak;
         }
         else
         {
-          currentStreak = 1;
+          current_streak = 1;
         }
 
-        if (currentStreak > rowMaxStreak)
+        if (current_streak > row_max_streak)
         {
-          rowMaxStreak = currentStreak;
+          row_max_streak = current_streak;
         }
       }
 
-      if (rowMaxStreak > maxGlobalStreak)
+      if (row_max_streak > max_global_streak)
       {
-        maxGlobalStreak = rowMaxStreak;
-        bestRow = i + 1;
+        max_global_streak = row_max_streak;
+        best_row = i + 1;
       }
     }
 
-    return bestRow;
+    return best_row;
   }
 }
 
@@ -68,7 +68,7 @@ int main(int argc, char** argv)
   }
 
   const int mode = argv[1][0] - '0';
-  int* dynamicMatrix = nullptr;
+  int* dynamic_matrix = nullptr;
 
   try
   {
@@ -87,7 +87,7 @@ int main(int argc, char** argv)
     }
 
     int* matrix = nullptr;
-    int stackMatrix[kayumov::MAX_STATIC_SIZE];
+    int stack_matrix[kayumov::MAX_STATIC_SIZE];
 
     if (mode == 1)
     {
@@ -95,12 +95,12 @@ int main(int argc, char** argv)
       {
         throw std::runtime_error("Error: Matrix size exceeds static array limit.");
       }
-      matrix = stackMatrix;
+      matrix = stack_matrix;
     }
     else
     {
-      dynamicMatrix = new int[rows * cols];
-      matrix = dynamicMatrix;
+      dynamic_matrix = new int[rows * cols];
+      matrix = dynamic_matrix;
     }
 
     for (std::size_t i = 0; i < (rows * cols); ++i)
@@ -120,12 +120,12 @@ int main(int argc, char** argv)
     }
     out << answer << '\n';
 
-    delete[] dynamicMatrix;
+    delete[] dynamic_matrix;
   }
   catch (const std::exception& e)
   {
     std::cerr << e.what() << '\n';
-    delete[] dynamicMatrix;
+    delete[] dynamic_matrix;
     return 2;
   }
 
