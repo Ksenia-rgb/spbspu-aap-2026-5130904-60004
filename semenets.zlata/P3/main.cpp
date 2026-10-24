@@ -3,7 +3,7 @@
 #include <new>
 
 namespace semenets
-}
+{
   void SpiralDecrease(int* a, int n, int m);
 }
 
