@@ -4,7 +4,7 @@
 
 namespace semenets
 {
-  void SpiralDecrease(int* a, int n, int m);
+  void SpiralDecrease(int* a, long long n, long long m);
 }
 
 int main(int argc, char* argv[])
