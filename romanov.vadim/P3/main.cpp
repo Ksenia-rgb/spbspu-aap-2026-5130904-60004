@@ -1,11 +1,10 @@
 #include <fstream>
 #include <iostream>
 #include <stdexcept>
-namespace romanov
-{
+namespace romanov {
   const int max_elements = 10000;
   int matrixLocalMaxCount(int x, int y, int **arr);
-  void creatingMatrix(int n, const char *input__file, const char *output_file);
+  void creatingMatrix(int n, const char *input_file, const char *output_file);
 }
 int main(int arg_count, char *arg_values[])
 {
@@ -85,7 +84,7 @@ void romanov::creatingMatrix(int n, const char *input_file, const char *output_f
     for (int i = 0; i < x; ++i) {
       for (int j = 0; j < y; ++j) {
         if (!(input >> matrix[i][j])) {
-          for (int k = 0; k < i; ++k) {
+          for (int k = 0; k < x; ++k) {
             delete[] matrix[k];
           }
           delete[] matrix;
