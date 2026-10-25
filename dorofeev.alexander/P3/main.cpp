@@ -70,7 +70,7 @@ int main(int argc, char ** argv)
 
   const int total = rows * cols;
 
- const  int fixed[10000];
+ const  int maxFixedSize = 10000;
  int fixed[maxFixedSize];
   int * data = nullptr;
   try {
