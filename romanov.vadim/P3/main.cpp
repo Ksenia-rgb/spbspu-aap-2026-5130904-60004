@@ -51,7 +51,7 @@ int romanov::matrixLocalMaxCount(int x, int y, int **arr)
   }
   return local_max_count;
 }
-void romanov::creatingMatrix(int n, const char *input_file, const char *output_file) 
+void romanov::creatingMatrix(int n, const char *input_file, const char *output_file)
 {
   std::ifstream input(input_file);
   int x = 0, y = 0;
