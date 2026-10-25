@@ -94,7 +94,7 @@ void romanov::creatingMatrix(int n, const char *input_file, const char *output_f
     }
     result = matrixLocalMaxCount(x, y, matrix);
     for (int i = 0; i < x; ++i) {
-      delete matrix[i];
+      delete[] matrix[i];
     }
     delete[] matrix;
   }
