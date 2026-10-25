@@ -49,7 +49,7 @@ int main(int argc, char ** argv)
     std::cerr << "Error: wrong number of arguments\n";
     return 1;
   }
-  int num = argv[1][0] - '0';
+ const  int num = argv[1][0] - '0';
   if (!((num == 1 || num == 2) && argv[1][1] == '\0')) {
     std::cerr << "Error: first argument must be 1 or 2\n";
     return 1;
@@ -68,9 +68,10 @@ int main(int argc, char ** argv)
     return 1;
   }
 
-  int total = rows * cols;
+  const int total = rows * cols;
 
-  int fixed[10000];
+ const  int fixed[10000];
+ int fixed[maxFixedSize];
   int * data = nullptr;
   try {
     if (num == 1) {
