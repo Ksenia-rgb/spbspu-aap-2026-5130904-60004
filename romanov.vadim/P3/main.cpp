@@ -40,7 +40,10 @@ int romanov::matrixLocalMaxCount(int x, int y, int **arr)
   for (int i = 1; i < x - 1; ++i) {
     for (int j = 1; j < y - 1; ++j) {
       const int cur = arr[i][j];
-      const bool is_local_max = (cur > arr[i - 1][j - 1] && cur > arr[i - 1][j] && cur > arr[i - 1][j + 1] && cur > arr[i][j - 1] && cur > arr[i][j + 1] && cur > arr[i + 1][j - 1] && cur > arr[i + 1][j] && cur > arr[i + 1][j + 1]);
+      const bool top_row = (cur > arr[i - 1][j - 1] && cur > arr[i - 1][j] && cur > arr[i - 1][j + 1]);
+      const bool mid_row = (cur > arr[i][j - 1] && cur > arr[i][j + 1]);
+      const bool bot_row = (cur > arr[i + 1][j - 1] && cur > arr[i + 1][j] && cur > arr[i + 1][j + 1]);
+      const bool is_local_max = (top_row && mid_row && bot_row);
       if (is_local_max) {
         ++local_max_count;
       }
