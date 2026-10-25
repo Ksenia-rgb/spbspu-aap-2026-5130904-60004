@@ -28,9 +28,9 @@ int main(int arg_count, char* arg_values[])
   }
   try
   {
-  romanov::creatingMatrix(n, arg_values[2], arg_values[3]);
+    romanov::creatingMatrix(n, arg_values[2], arg_values[3]);
   }
-  catch (std::logic_error &e)
+  catch (std::logic_error& e)
   {
     std::cerr << e.what() << '\n';
     return 2;
@@ -49,12 +49,12 @@ int romanov::matrixLocalMaxCount(int x, int y, int** arr)
     for (int j = 1; j < y - 1; ++j)
     {
       bool is_local_max = (
-         arr[i][j] > arr[i-1][j-1] &&
-         arr[i][j] > arr[i-1][j] &&
-         arr[i][j] > arr[i-1][j+1] &&
-         arr[i][j] > arr[i][j-1] &&
-         arr[i][j] > arr[i][j+1] &&
-         arr[i][j] > arr[i+1][j-1] &&
+         arr[i][j] > arr[i - 1][j - 1] &&
+         arr[i][j] > arr[i - 1][j] &&
+         arr[i][j] > arr[i - 1][j + 1] &&
+         arr[i][j] > arr[i][j - 1] &&
+         arr[i][j] > arr[i][j + 1] &&
+         arr[i][j] > arr[i + 1][j - 1] &&
          arr[i][j] > arr[i + 1][j] &&
          arr[i][j] > arr[i + 1][j + 1]
       );
@@ -110,6 +110,7 @@ void romanov::creatingMatrix(int n, const char* inputFile, const char* outputFil
     for (int i = 0; i < x; ++i)
     {
       for (int j = 0; j < y; ++j)
+      {
         if (!(input >> matrix[i][j]))
         {
           for (int k = 0; k < i; ++k)
@@ -119,6 +120,7 @@ void romanov::creatingMatrix(int n, const char* inputFile, const char* outputFil
           delete[] matrix;
           throw std::logic_error("Wrong matrix format");
         }
+      }
     }
     result = matrixLocalMaxCount(x, y, matrix);
     for (int i = 0; i < x; ++i)
