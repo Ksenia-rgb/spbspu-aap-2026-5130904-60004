@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-namespace romanov 
+namespace romanov
 {
   int matrixLocalMaxCount(int x, int y, int** arr);
   void creatingMatrix(int n, const char* inputFile, const char* outputFile);
