@@ -2,15 +2,16 @@
 #include <fstream>
 #include <stdexcept>
 #include <climits>
+#include <exception>
 
 namespace ibragimov {
-  int NumColLSR(const int *mat, int rows, int cols);
+  int numColLSR(const int *mat, int rows, int cols);
 }
 
 int main(int argc, char *argv[])
 {
   int *d_mat = nullptr;
-
+  const int mx_stat_size = 10000;
   try {
     if (argc != 4) {
       throw std::invalid_argument("Too many arguments");
@@ -51,13 +52,13 @@ int main(int argc, char *argv[])
       throw std::runtime_error("mat is too large");
     }
 
-    int count = rows * cols;
+    const int count = rows * cols;
 
-    if (num == 1 && count > 10000) {
+    if (num == 1 && count > mx_stat_size) {
       throw std::runtime_error("mat is too large");
     }
 
-    int f_mat[10000];
+    int f_mat[mx_stat_size];
     int *mat = f_mat;
 
     if (num == 2 && count > 0) {
@@ -71,7 +72,7 @@ int main(int argc, char *argv[])
       }
     }
 
-    const int result = ibragimov::NumColLSR(mat, rows, cols);
+    const int result = ibragimov::numColLSR(mat, rows, cols);
 
     std::ofstream output(argv[3]);
 
@@ -99,7 +100,7 @@ int main(int argc, char *argv[])
 }
 
 namespace ibragimov {
-  int NumColLSR(const int *mat, int rows, int cols)
+  int numColLSR(const int *mat, int rows, int cols)
   {
     int mx_len = 0;
     int res_col = 0;
