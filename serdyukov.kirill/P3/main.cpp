@@ -7,9 +7,9 @@
 #include <stdexcept>
 
 namespace serdyukov {
-void leftBottomSpiral(int *matrix, int rows, int columns);
-bool isNumber(const char *cstring);
-constexpr int fixed_size = 10000;
+  void leftBottomSpiral(int *matrix, int rows, int columns);
+  bool isNumber(const char *cstring);
+  constexpr int fixed_size = 10000;
 }
 
 int main(int argc, char *argv[])
@@ -39,12 +39,11 @@ int main(int argc, char *argv[])
   }
   int rows = 0;
   int columns = 0;
-  if (!(input >> rows >> columns) || rows < 0 || columns < 0 ||
-      ((rows == 0) != (columns == 0))) {
+  if (!(input >> rows >> columns) || rows < 0 || columns < 0 || ((rows == 0) != (columns == 0))) {
     std::cerr << "Incorrect size\n";
     return 2;
   }
-  if (rows != 0 && std::numeric_limits<int>::max() / rows < columns) {
+  if (rows != 0 && std::numeric_limits< int >::max() / rows < columns) {
     std::cerr << "Too much elements\n";
     return 2;
   }
@@ -113,13 +112,12 @@ int main(int argc, char *argv[])
 
 bool serdyukov::isNumber(const char *cstring)
 {
-  if (cstring[0] != '-' &&
-      !std::isdigit(static_cast<unsigned char>(cstring[0]))) {
+  if (cstring[0] != '-' && !std::isdigit(static_cast< unsigned char >(cstring[0]))) {
     return false;
   }
   size_t i = 1;
   while (cstring[i] != '\0') {
-    if (!std::isdigit(static_cast<unsigned char>(cstring[i]))) {
+    if (!std::isdigit(static_cast< unsigned char >(cstring[i]))) {
       return false;
     }
     i++;
