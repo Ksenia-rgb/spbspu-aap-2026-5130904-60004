@@ -1,4 +1,3 @@
-// clang-format off
 #include <iostream>
 
 namespace alekseev {
@@ -49,6 +48,6 @@ int findAlmostMax() {
   std::cout << max2 << std::endl;
   return 0;
 }
-} // namespace alekseev
+}
 
 int main() { return alekseev::findAlmostMax(); }
