@@ -1,6 +1,5 @@
 #include <iostream>
 #include <fstream>
-#include <vector>
 #include <cctype>
 #include <limits>
 #include <cstring>
@@ -32,7 +31,6 @@ namespace zabrodotsy
     }
     return true;
   }
-
   int processMatrix(const int* matrix, int rows, int columns)
   {
     if (rows == 0 || columns == 0)
@@ -59,12 +57,11 @@ namespace zabrodotsy
     return valid_columns;
   }
 }
-
 int main(int argc, char* argv[])
 {
   if (argc != 4)
   {
-    std::cerr << "Error: Invalid number of arguments. Expected 3 parameters." << std::endl;
+    std::cerr << "Error: Invalid number" << std::endl;
     return 1;
   }
   const char* const num_param = argv[1];
@@ -89,12 +86,81 @@ int main(int argc, char* argv[])
   }
   const int max_element_buf = 100;
   char buf[max_element_buf];
-  std::vector< int > parsed_elements;
-  while (in_file >> buf)
+  if (!(in_file >> buf))
   {
+    std::cerr << "Error: File is empty" << std::endl;
+    return 2;
+  }
+  if (!zabrodotsy::isNumber(buf))
+  {
+    std::cerr << "Error: Not a integer number" << std::endl;
+    return 2;
+  }
+  long long temp_rows = std::strtoll(buf, nullptr, 10);
+  if (temp_rows < 0 || temp_rows > std::numeric_limits< int >::max())
+  {
+    std::cerr << "Error: Invalid rows dimension" << std::endl;
+    return 2;
+  }
+  const int rows = static_cast< int >(temp_rows);
+  if (!(in_file >> buf))
+  {
+    std::cerr << "Error: Matrix dimensions are missing" << std::endl;
+    return 2;
+  }
+  if (!zabrodotsy::isNumber(buf))
+  {
+    std::cerr << "Error: Not a integer number" << std::endl;
+    return 2;
+  }
+  long long temp_cols = std::strtoll(buf, nullptr, 10);
+  if (temp_cols < 0 || temp_cols > std::numeric_limits< int >::max())
+  {
+    std::cerr << "Error: Invalid columns dimension" << std::endl;
+    return 2;
+  }
+  const int cols = static_cast< int >(temp_cols);
+  if (rows > 0 && cols > std::numeric_limits< int >::max() / rows)
+  {
+    std::cerr << "Error: Matrix size is too large" << std::endl;
+    return 2;
+  }
+  const int total_elements = rows * cols;
+  int* matrix_ptr = nullptr;
+  const int max_element = 10000;
+  int static_matrix[max_element];
+
+  if (mode == 1)
+  {
+    if (total_elements > max_element)
+    {
+      std::cerr << "Error: Exceeding the 10000 elements limit matrix" << std::endl;
+      return 2;
+    }
+    matrix_ptr = static_matrix;
+  }
+  else
+  {
+    matrix_ptr = new int[total_elements];
+  }
+  for (int i = 0; i < total_elements; ++i)
+  {
+    if (!(in_file >> buf))
+    {
+      std::cerr << "Error: Matrix size and elements error" << std::endl;
+      if (mode == 2)
+      {
+        delete[] matrix_ptr;
+      }
+      return 2;
+    }
     if (!zabrodotsy::isNumber(buf))
     {
       std::cerr << "Error: Not a integer number" << std::endl;
+      if (mode == 2)
+      {
+        delete[] matrix_ptr;
+      }
       return 2;
     }
     char* end_ptr = nullptr;
@@ -102,59 +168,28 @@ int main(int argc, char* argv[])
     if (temp < std::numeric_limits< int >::min() || temp > std::numeric_limits< int >::max())
     {
       std::cerr << "Error: Integer overflow" << std::endl;
+      if (mode == 2)
+      {
+        delete[] matrix_ptr;
+      }
       return 2;
     }
-    parsed_elements.push_back(static_cast< int >(temp));
+    matrix_ptr[i] = static_cast< int >(temp);
   }
-  in_file.close();
-  if (parsed_elements.empty())
-  {
-    std::cerr << "Error: File is empty" << std::endl;
-    return 2;
-  }
-  if (parsed_elements.size() < 2)
-  {
-    std::cerr << "Error: Matrix dimensions are missing" << std::endl;
-    return 2;
-  }
-  const int rows = parsed_elements[0];
-  const int cols = parsed_elements[1];
-  if (rows < 0 || cols < 0)
-  {
-    std::cerr << "Error: Matrix dimensions cannot be negative" << std::endl;
-    return 2;
-  }
-  const size_t expected_size = static_cast< size_t >(rows) * static_cast< size_t >(cols) + 2;
-  if (parsed_elements.size() != expected_size)
+  if (in_file >> buf)
   {
     std::cerr << "Error: Matrix size and elements error" << std::endl;
+    if (mode == 2)
+    {
+      delete[] matrix_ptr;
+    }
     return 2;
   }
-  int result = 0;
-  if (mode == 1)
+  in_file.close();
+  int result = zabrodotsy::processMatrix(matrix_ptr, rows, cols);
+  if (mode == 2)
   {
-    const int max_element = 10000;
-    if (rows * cols > max_element)
-    {
-      std::cerr << "Error: Exceeding the 10000 elements limit matrix" << std::endl;
-      return 2;
-    }
-    int static_matrix[max_element];
-    for (int i = 0; i < rows * cols; ++i)
-    {
-      static_matrix[i] = parsed_elements[i + 2];
-    }
-    result = zabrodotsy::processMatrix(static_matrix, rows, cols);
-  }
-  else
-  {
-    int* const dynamic_matrix = new int[rows * cols];
-    for (int i = 0; i < rows * cols; ++i)
-    {
-      dynamic_matrix[i] = parsed_elements[i + 2];
-    }
-    result = zabrodotsy::processMatrix(dynamic_matrix, rows, cols);
-    delete[] dynamic_matrix;
+    delete[] matrix_ptr;
   }
   std::ofstream out_file(output_param);
   if (!out_file.is_open())
@@ -166,3 +201,4 @@ int main(int argc, char* argv[])
   out_file.close();
   return 0;
 }
+
