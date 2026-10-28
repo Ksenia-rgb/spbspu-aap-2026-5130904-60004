@@ -52,7 +52,7 @@ int main(int argc, char **argv)
   }
 
   const int decimalBase = 10;
-  char* end = nullptr;
+  char * end = nullptr;
   const long num = std::strtol(argv[1], &end, decimalBase);
   if (*end != '\0' || (num != 1 && num != 2)) {
     std::cerr << "Error: first argument must be 1 or 2\n";
