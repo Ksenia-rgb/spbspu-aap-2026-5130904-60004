@@ -1,6 +1,7 @@
 #include <exception>
 #include <fstream>
 #include <iostream>
+#include <cstdlib>
 #include <stdexcept>
 
 namespace dorofeev {
@@ -49,8 +50,11 @@ int main(int argc, char **argv)
     std::cerr << "Error: wrong number of arguments\n";
     return 1;
   }
-  const int num = argv[1][0] - '0';
-  if (!((num == 1 || num == 2) && argv[1][1] == '\0')) {
+
+  const int decimalBase = 10;
+  char* end = nullptr;
+  long num = std::strtol(argv[1], &end, decimalBase);
+  if (*end != '\0' || (num != 1 && num != 2)) {
     std::cerr << "Error: first argument must be 1 or 2\n";
     return 1;
   }
