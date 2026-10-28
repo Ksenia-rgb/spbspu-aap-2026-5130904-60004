@@ -36,7 +36,7 @@ namespace chervov
         {
           count = 0;
         }
-        if (count > max_count)
+	if (count >= max_count)
         {
           max_count = count;
           result = i + 1;
