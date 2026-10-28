@@ -111,6 +111,12 @@ int main(int argc, char** argv)
       }
     }
 
+    in >> std::ws;
+    if (!in.eof())
+    {
+      throw std::runtime_error("Error: Too many elements in the file.");
+    }
+
     const std::size_t answer = kayumov::findLongestSeriesRow(matrix, rows, cols);
 
     std::ofstream out(argv[3]);
