@@ -96,7 +96,7 @@ int main(int argc, char* argv[])
     std::cerr << "Error: Not a integer number" << std::endl;
     return 2;
   }
-  long long temp_rows = std::strtoll(buf, nullptr, 10);
+  const long long temp_rows = std::strtoll(buf, nullptr, 10);
   if (temp_rows < 0 || temp_rows > std::numeric_limits< int >::max())
   {
     std::cerr << "Error: Invalid rows dimension" << std::endl;
@@ -113,7 +113,7 @@ int main(int argc, char* argv[])
     std::cerr << "Error: Not a integer number" << std::endl;
     return 2;
   }
-  long long temp_cols = std::strtoll(buf, nullptr, 10);
+  const long long temp_cols = std::strtoll(buf, nullptr, 10);
   if (temp_cols < 0 || temp_cols > std::numeric_limits< int >::max())
   {
     std::cerr << "Error: Invalid columns dimension" << std::endl;
@@ -164,7 +164,7 @@ int main(int argc, char* argv[])
       return 2;
     }
     char* end_ptr = nullptr;
-    long long temp = std::strtoll(buf, &end_ptr, 10);
+    const long long temp = std::strtoll(buf, &end_ptr, 10);
     if (temp < std::numeric_limits< int >::min() || temp > std::numeric_limits< int >::max())
     {
       std::cerr << "Error: Integer overflow" << std::endl;
@@ -186,7 +186,7 @@ int main(int argc, char* argv[])
     return 2;
   }
   in_file.close();
-  int result = zabrodotsy::processMatrix(matrix_ptr, rows, cols);
+  const int result = zabrodotsy::processMatrix(matrix_ptr, rows, cols);
   if (mode == 2)
   {
     delete[] matrix_ptr;
