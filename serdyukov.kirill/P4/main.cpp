@@ -4,6 +4,7 @@
 
 namespace serdyukov {
   void compressString(const char* input, char* output);
+  constexpr int total_values = 256;
 }
 
 int main()
@@ -25,7 +26,7 @@ int main()
         break;
       }
 
-      char* temp = new char[size + 1];
+      char* const temp = new char[size + 1];
 
       for (size_t i = 0; i < size - 1; ++i) {
         temp[i] = str[i];
@@ -59,17 +60,17 @@ int main()
 
 void serdyukov::compressString(const char* input, char* output)
 {
-  int frequency[256] = {0};
+  int frequency[serdyukov::total_values] = {0};
   size_t i = 0;
   while (input[i] != '\0') {
-    unsigned char ch = static_cast< unsigned char >(input[i]);
+    const unsigned char ch = static_cast< unsigned char >(input[i]);
     frequency[ch]++;
     ++i;
   }
   i = 0;
   int j = 0;
   while (input[i] != '\0') {
-    unsigned char ch = static_cast< unsigned char >(input[i]);
+    const unsigned char ch = static_cast< unsigned char >(input[i]);
     if (frequency[ch] > 1) {
       frequency[ch] = 1;
       output[j] = input[i];
