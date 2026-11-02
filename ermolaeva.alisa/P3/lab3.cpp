@@ -10,7 +10,7 @@ namespace ermolaeva {
   void readElements(std::ifstream &in, int *buf, long long total);
   void transform(int *a, int rows, int cols);
   void writeMatrix(std::ofstream &out, const int *a, int rows, int cols);
-} // namespace ermolaeva
+}
 
 int main(int argc, char *argv[])
 {
@@ -139,4 +139,4 @@ namespace ermolaeva {
     out << '\n';
   }
 
-} // namespace ermolaeva
+}
