@@ -16,7 +16,7 @@ int main()
   try
   {
     str = semenets::readLine(std::cin);
-    if (std::strlen(str)==0)
+    if (std::strlen(str) == 0)
     {
       std::cerr << "Error: Empty input\n";
       delete[] str;
@@ -61,7 +61,8 @@ namespace semenets
           delete[] buf;
           throw;
         }
-        for (size_t i = 0; i < size; i++) {
+        for (size_t i = 0; i < size; i++)
+        {
           more_big[i] = buf[i];
         }
         delete[] buf;
