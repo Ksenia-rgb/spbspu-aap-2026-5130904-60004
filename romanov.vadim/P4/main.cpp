@@ -12,6 +12,8 @@ int main()
   char* n = romanov::readDynamicString();
   romanov::removeLatin(n);
   std::cout << "The new line is " << n << '\n';
+  delete[] n;
+  return 0;
 }
 char* romanov::readDynamicString()
 {
