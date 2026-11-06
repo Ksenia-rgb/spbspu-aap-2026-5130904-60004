@@ -3,7 +3,7 @@
 #include <iostream>
 #include <new>
 #include <stdexcept>
-int main(int argc, char *argv[]) 
+int main(int argc, char *argv[])
 {
   if (argc < 4) {
     std::cerr << "Not enought arguments" << "\n";
