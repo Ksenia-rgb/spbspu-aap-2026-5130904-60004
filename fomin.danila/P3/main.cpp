@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
       ++k;
     }
     if (!in.eof()) {
-      throw std::invalid_argument("Writed not int in matrix");
+      throw std::invalid_argument("Writed not int in matrix or size matrix");
     }
     if (k != size_x * size_y) {
       throw std::invalid_argument("Not enought arguments");
@@ -84,16 +84,17 @@ int main(int argc, char *argv[])
     return 2;
   }
   in.close();
-  for (int i = 2; i < size_x - 1; ++i) {
+  for (int i = 0; i < size_x - 1; ++i) {
     if (matrix[i] == matrix[i + 1]) {
       ++g;
+      i = size_x;
     }
   }
   for (int i = 1; i < size_y; ++i) {
-    for (int h = 1; h < size_x - 1; ++h) {
+    for (int h = 1; h <= size_x - 1; ++h) {
       if (matrix[h + size_x * i - 1] == matrix[h + size_x * i]) {
         ++g;
-        h = size_x - 1;
+        h = size_x;
       }
     }
   }
