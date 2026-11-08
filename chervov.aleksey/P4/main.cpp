@@ -19,7 +19,6 @@ int main()
     result = new char[length + 1];
     chervov::lowerLatin(input, result);
     std::cout << result << '\n';
-    return 0;
   }
   catch (const std::bad_alloc&)
   {
@@ -30,6 +29,7 @@ int main()
   }
   delete[] result;
   delete[] input;
+  return 0;
 }
 
 char* chervov::readLine(std::size_t& length)
