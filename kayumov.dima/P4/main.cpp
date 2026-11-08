@@ -23,12 +23,7 @@ namespace ksyumov
         dest[k++] = src1[i++];
       }
 
-      if (k >= dest_size - 1)
-      {
-        break;
-      }
-
-      if (src2[j] != '\0')
+      if (src2[j] != '\0' && k < dest_size - 1)
       {
         dest[k++] = src2[j++];
       }
@@ -77,6 +72,13 @@ int main()
     }
 
     input_buffer[length] = '\0';
+
+    if (length == 0)
+    {
+      std::cerr << "Error: Input is empty." << std::endl;
+      delete[] input_buffer;
+      return 1;
+    }
 
     const size_t result_capacity = length + std::strlen(literal_str) + 1;
 
