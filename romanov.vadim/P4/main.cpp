@@ -5,7 +5,6 @@ namespace romanov
 {
   void readDynamicString(char*& buffer, int& length);
   void removeLatin(char * buffer, char * my_str);
-  
 }
 int main()
 {
