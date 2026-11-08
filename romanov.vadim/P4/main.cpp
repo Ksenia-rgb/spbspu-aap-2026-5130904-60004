@@ -4,7 +4,7 @@
 namespace romanov
 {
   void readDynamicString(char*& buffer, int& length);
-  void removeLatin(char * buffer, char * my_str);
+  void removeLatin(char* buffer, char* const my_str);
 }
 int main()
 {
@@ -13,12 +13,12 @@ int main()
   std::cout << "Write a line" << '\n';
   romanov::readDynamicString(my_str, length);
   try
-  {
-  char* new_str = new char[length+1];
+{
+  char* const new_str = new char[length + 1];
   romanov::removeLatin(new_str, my_str);
   std::cout << "The new line is " << new_str << '\n';
   delete[] new_str;
-  }
+}
   catch (...)
   {
     delete[] my_str;
@@ -35,19 +35,26 @@ void romanov::readDynamicString(char*& buffer, int& length)
   try
   {
     buffer = new char[capacity];
-    char ch;
+    char ch = 0;
     while (std::cin.get(ch) && ch != '\n')
     {
       if (length + 1 >= capacity)
       {
         capacity *= 2;
-        char* new_buffer = new char[capacity];
+        char* const new_buffer = new char[capacity];
         std::copy(buffer, buffer + length, new_buffer);
         delete[] buffer;
         buffer = new_buffer;
       }
       buffer[length] = ch;
       length++;
+    }
+    if (length == 0)
+    {
+      delete[] buffer;
+      buffer = nullptr;
+      std::cerr << "Empty input\n";
+      std::exit(1);
     }
     buffer[length] = '\0';
   }
@@ -57,13 +64,13 @@ void romanov::readDynamicString(char*& buffer, int& length)
     std::exit(1);
   }
 }
-void romanov::removeLatin(char* buffer, char * my_str)
+void romanov::removeLatin(char* buffer, char* my_str)
 {
   int write_index = 0;
   int read_index = 0;
-  while(my_str[read_index] != '\0')
+  while (my_str[read_index] != '\0')
   {
-    char ch = my_str[read_index];
+    const char ch = my_str[read_index];
     if (!std::isalpha(ch))
     {
       buffer[write_index] = my_str[read_index];
