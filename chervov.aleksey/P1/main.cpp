@@ -10,7 +10,7 @@ namespace chervov
     void operator()(int num);
     int operator()() const;
   private:
-    const int MinSequenceLength;
+    const int min_sequence_length_;
     int first_;
     int second_;
     int length_;
@@ -55,7 +55,7 @@ int main()
 void chervov::SumDupCount::operator()(int num)
 {
   ++length_;
-  if (length_ >= MinSequenceLength && num == first_ + second_)
+  if (length_ >= min_sequence_length_ && num == first_ + second_)
   {
     ++count_;
   }
@@ -65,7 +65,7 @@ void chervov::SumDupCount::operator()(int num)
 
 int chervov::SumDupCount::operator()() const
 {
-  if (length_ < MinSequenceLength)
+  if (length_ < min_sequence_length_)
   {
     throw std::runtime_error("Length sequence short");
   }
@@ -73,7 +73,7 @@ int chervov::SumDupCount::operator()() const
 }
 
 chervov::SumDupCount::SumDupCount():
-  MinSequenceLength(3),
+  min_sequence_length_(3),
   first_(0),
   second_(0),
   length_(0),
