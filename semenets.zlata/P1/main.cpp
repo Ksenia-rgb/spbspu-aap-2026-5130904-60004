@@ -22,7 +22,7 @@ semenets::CountSignChanges::CountSignChanges():
   count_num_(0),
   znak_past_(0),
   znak_new_(0)
-  {}
+{}
 
 void semenets::CountSignChanges::operator()(int value)
 {
