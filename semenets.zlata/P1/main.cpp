@@ -3,9 +3,9 @@
 
 namespace semenets
 {
-  struct countSignChanges
+  struct CountSignChanges
   {
-    countSignChanges();
+    CountSignChanges();
     void operator()(int value);
     size_t operator()() const;
 
@@ -17,14 +17,14 @@ namespace semenets
   };
 }
 
-semenets::countSignChanges::countSignChanges():
+semenets::CountSignChanges::CountSignChanges():
   count_(0),
   count_num_(0),
   znak_past_(0),
   znak_new_(0)
   {}
 
-void semenets::countSignChanges::operator()(int value)
+void semenets::CountSignChanges::operator()(int value)
 {
   ++count_num_;
   if (value > 0)
@@ -42,7 +42,7 @@ void semenets::countSignChanges::operator()(int value)
   znak_past_ = znak_new_;
 }
 
-size_t semenets::countSignChanges::operator()() const
+size_t semenets::CountSignChanges::operator()() const
 {
   return count_;
 }
@@ -51,7 +51,7 @@ int main()
 {
   try
   {
-    semenets::countSignChanges counter;
+    semenets::CountSignChanges counter;
     while (true)
     {
       int value = 0;
