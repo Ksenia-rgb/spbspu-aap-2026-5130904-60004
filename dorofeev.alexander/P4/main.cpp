@@ -1,35 +1,31 @@
-#include <iostream>
 #include <cstring>
+#include <iostream>
 #include <new>
 
 namespace dorofeev {
   const size_t startCapacity = 100;
 
-  char* readline(std::istream& in)
+  char * readLine(std::istream & in)
   {
     size_t capacity = startCapacity;
     size_t size = 0;
-    char* buf = new (std::nothrow) char[capacity];
+    char * buf = new (std::nothrow) char[capacity];
     if (buf == nullptr) {
       return nullptr;
     }
     char c = 0;
     while (in.get(c) && c != '\n') {
       if (size + 1 >= capacity) {
-        char* newBuf = new (std::nothrow) char[capacity * 2];
-
-        if (newBuf == nullptr) {
+        char * const bigger = new (std::nothrow) char[capacity * 2];
+        if (bigger == nullptr) {
           delete[] buf;
           return nullptr;
         }
-
         for (size_t i = 0; i < size; ++i) {
-          newBuf[i] = buf[i];
+          bigger[i] = buf[i];
         }
-
         delete[] buf;
-
-        buf = newBuf;
+        buf = bigger;
         capacity *= 2;
       }
       buf[size] = c;
@@ -39,34 +35,37 @@ namespace dorofeev {
     return buf;
   }
 
-  char* repSym(char* buf, const char* s)
+  char * repSym(char * dest, const char * src)
   {
     size_t size = 0;
-    buf[0] = '\0';
-    for (size_t i = 0; s[i] != '\0'; ++i) {
-      if (std::strchr(s + i + 1, s[i]) != nullptr && std::strchr(buf, s[i]) == nullptr) {
-        buf[size] = s[i];
+    dest[0] = '\0';
+    for (size_t i = 0; src[i] != '\0'; ++i) {
+      if (std::strchr(src + i + 1, src[i]) != nullptr && std::strchr(dest, src[i]) == nullptr) {
+        dest[size] = src[i];
         ++size;
-        buf[size] = '\0';
+        dest[size] = '\0';
       }
     }
-    return buf;
+    return dest;
   }
 }
 
 int main()
 {
-  char* s = dorofeev::readline(std::cin);
-
+  char * const s = dorofeev::readLine(std::cin);
   if (s == nullptr) {
     std::cerr << "Error: not enough memory\n";
     return 1;
   }
 
-  size_t len = std::strlen(s);
+  const size_t len = std::strlen(s);
+  if (len == 0 && std::cin.eof()) {
+    std::cerr << "Error: empty input\n";
+    delete[] s;
+    return 1;
+  }
 
-  char* result = new (std::nothrow) char[len + 1];
-
+  char * const result = new (std::nothrow) char[len + 1];
   if (result == nullptr) {
     std::cerr << "Error: not enough memory\n";
     delete[] s;
@@ -74,11 +73,9 @@ int main()
   }
 
   dorofeev::repSym(result, s);
-
-  std::cout << result << '\n';
+  std::cout << result << "\n";
 
   delete[] result;
   delete[] s;
-
   return 0;
 }
