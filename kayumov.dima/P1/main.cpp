@@ -25,3 +25,28 @@ int main()
     return 2;
   }
 }
+
+namespace kayumov
+{
+  int maxChislo()
+  {
+    int number = 0;
+    if (!(std::cin >> number))
+    {
+      throw std::invalid_argument("Invalid input");
+    }
+    int max_val = number;
+    while (std::cin >> number)
+    {
+      if (number > max_val)
+      {
+        max_val = number;
+      }
+    }
+    if (!std::cin.eof())
+    {
+      throw std::runtime_error("Read error");
+    }
+    return max_val;
+  }
+}
