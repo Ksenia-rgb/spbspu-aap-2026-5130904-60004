@@ -11,11 +11,9 @@ namespace ksyumov
     {
       return nullptr;
     }
-
     size_t i = 0;
     size_t j = 0;
     size_t k = 0;
-
     while ((src1[i] != '\0' || src2[j] != '\0') && k < dest_size - 1)
     {
       if (src1[i] != '\0')
