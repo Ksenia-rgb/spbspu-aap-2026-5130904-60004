@@ -16,6 +16,12 @@ int main()
   {
     std::size_t length = 0;
     input = chervov::readLine(length);
+    if (input[0] == '\0')
+    {
+      std::cerr << "No input string" << "\n";
+      delete[] input;
+      return 1;
+    }
     result = new char[length + 1];
     chervov::lowerLatin(input, result);
     std::cout << result << '\n';
