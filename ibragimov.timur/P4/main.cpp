@@ -18,7 +18,7 @@ int main()
     int len = 0;
 
     arr = new char[size];
-    char c;
+    char c = '\0';
 
     while (std::cin.get(c) && c != '\n') {
       if (len >= size - 1) {
@@ -26,7 +26,7 @@ int main()
           throw std::invalid_argument("String is too large");
         }
         size *= 2;
-        char *new_arr = new char[size];
+        char *const new_arr = new char[size];
         for (int i = 0; i < len; ++i) {
           new_arr[i] = arr[i];
         }
@@ -37,7 +37,11 @@ int main()
       arr[len] = c;
       len++;
     }
-
+    
+    if (len == 0 && std::cin.eof()) {
+      throw std::invalid_argument("Input is empty");
+    }
+    
     arr[len] = '\0';
 
     result = new char[len + 1];
@@ -69,11 +73,11 @@ namespace ibragimov {
   void uppLow(const char *arr, char *res)
   {
     for (int i = 0; arr[i] != '\0'; ++i) {
-      if (arr[i] >= 'A' && arr[i] <= 'Z')
+      if (arr[i] >= 'A' && arr[i] <= 'Z') {
         res[i] = std::tolower(arr[i]);
-      else
+      } else {
         res[i] = arr[i];
-    }
+      }
 
     res[std::strlen(arr)] = '\0';
   }
