@@ -4,7 +4,7 @@
 namespace romanov
 {
   void readDynamicString(char*& buffer, int& length);
-  void removeLatin(char* buffer, char* my_str);
+  void removeLatin(char* buffer, const char* my_str);
 }
 int main()
 {
@@ -64,7 +64,7 @@ void romanov::readDynamicString(char*& buffer, int& length)
     std::exit(1);
   }
 }
-void romanov::removeLatin(char* buffer, char* const my_str)
+void romanov::removeLatin(char* buffer, const char* my_str)
 {
   int write_index = 0;
   int read_index = 0;
