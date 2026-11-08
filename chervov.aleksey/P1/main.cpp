@@ -3,52 +3,41 @@
 
 namespace chervov
 {
-  void countSumOfPrevTwo()
+  struct SumDupCount
   {
-    const int MinSequenceLength = 3;
-    int first_number = 0, second_number = 0, current_number = 0;
-    int length_sequence = 0;
-
-    int count = 0;
-
-    while (std::cin >> current_number)
-    {
-      if (current_number == 0)
-      {
-        if (length_sequence < MinSequenceLength)
-        {
-          throw std::runtime_error("Lenght sequence short");
-        }
-        else
-        {
-          std::cout << count << "\n";
-          return;
-        }
-      }
-
-      length_sequence++;
-
-      if (length_sequence > 2)
-      {
-        if (first_number + second_number == current_number)
-        {
-          count++;
-        }
-      }
-
-      first_number = second_number;
-      second_number = current_number;
-    }
-
-    throw std::invalid_argument("Invalid sequence number");
-  }
+  public:
+    SumDupCount();
+    void operator()(int num);
+    int operator()() const;
+  private:
+    const int MinSequenceLength;
+    int first_;
+    int second_;
+    int length_;
+    int count_;
+  };
 }
 
 int main()
 {
   try
   {
-    chervov::countSumOfPrevTwo();
+    chervov::SumDupCount counter;
+    int value = 0;
+    while (true)
+    {
+      if (!(std::cin >> value))
+      {
+        throw std::invalid_argument("Invalid sequence number");
+      }
+
+      if (value == 0)
+      {
+        break;
+      }
+      counter(value);
+    }
+    std::cout << counter() << "\n";
     return 0;
   }
   catch (const std::invalid_argument &e)
@@ -62,3 +51,32 @@ int main()
     return 2;
   }
 }
+
+void chervov::SumDupCount::operator()(int num)
+{
+  ++length_;
+  if (length_ >= MinSequenceLength && num == first_ + second_)
+  {
+    ++count_;
+  }
+  second_ = first_;
+  first_ = num;
+}
+
+int chervov::SumDupCount::operator()() const
+{
+  if (length_ < MinSequenceLength)
+  {
+    throw std::runtime_error("Length sequence short");
+  }
+  return count_;
+}
+
+chervov::SumDupCount::SumDupCount():
+  MinSequenceLength(3),
+  first_(0),
+  second_(0),
+  length_(0),
+  count_(0)
+{}
+
