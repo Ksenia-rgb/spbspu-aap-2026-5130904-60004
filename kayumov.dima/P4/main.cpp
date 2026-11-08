@@ -5,7 +5,7 @@
 
 namespace ksyumov
 {
-  char * merge_interleaved(char * dest, const char * src1, const char * src2, const size_t dest_size) noexcept
+  char * mergeInterleaved(char * const dest, const char * src1, const char * src2, const size_t dest_size) noexcept
   {
     if (dest == nullptr || src1 == nullptr || src2 == nullptr || dest_size == 0)
     {
@@ -36,14 +36,15 @@ namespace ksyumov
 
 int main()
 {
-  const char * literal_str = "def_";
+  const char * const literal_str = "def_";
 
   char * input_buffer = nullptr;
   char * result_buffer = nullptr;
 
   try
   {
-    size_t capacity = 16;
+    const size_t initial_capacity = 16;
+    size_t capacity = initial_capacity;
     size_t length = 0;
 
     input_buffer = new char[capacity];
@@ -61,7 +62,7 @@ int main()
       {
         capacity *= 2;
 
-        char * new_buffer = new char[capacity];
+        char * const new_buffer = new char[capacity];
 
         std::strncpy(new_buffer, input_buffer, length);
         delete[] input_buffer;
@@ -84,7 +85,7 @@ int main()
 
     result_buffer = new char[result_capacity];
 
-    char * status = ksyumov::merge_interleaved(result_buffer, input_buffer, literal_str, result_capacity);
+    char * const status = ksyumov::mergeInterleaved(result_buffer, input_buffer, literal_str, result_capacity);
 
     if (status != nullptr)
     {
