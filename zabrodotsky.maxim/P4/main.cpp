@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstddef>
 namespace zabrodotsky {
-  int Duplicates(const char* str)
+  int duplicates(const char* str)
   {
     if (str == nullptr || str[0] == '\0') {
       return 0;
@@ -22,7 +22,7 @@ int main()
     std::cerr << "Failed to read input\n";
     return 1;
   }
-  int result = zabrodotsky::Duplicates(input_buffer);
+  const int result = zabrodotsky::Duplicates(input_buffer);
   std::cout << result << "\n";
   return 0;
 }
