@@ -37,11 +37,10 @@ int main()
       arr[len] = c;
       len++;
     }
-    
+
     if (len == 0 && std::cin.eof()) {
       throw std::invalid_argument("Input is empty");
     }
-    
     arr[len] = '\0';
 
     result = new char[len + 1];
@@ -78,7 +77,7 @@ namespace ibragimov {
       } else {
         res[i] = arr[i];
       }
-
+    }
     res[std::strlen(arr)] = '\0';
   }
 }
