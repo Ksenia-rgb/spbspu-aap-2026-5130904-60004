@@ -34,16 +34,17 @@ int main()
 
 char* chervov::readLine(std::size_t& length)
 {
-  std::size_t capacity = 8;
+  const std::size_t initialCapacity = 8;
+  std::size_t capacity = initialCapacity;
   length = 0;
   char* buf = new char[capacity];
-  int ch;
+  int ch = 0;
   while ((ch = std::cin.get()) != EOF && ch != '\n')
   {
     if (length + 1 >= capacity)
     {
-      std::size_t new_capacity = capacity * 2;
-      char* tmp = new char[new_capacity];
+      const std::size_t new_capacity = capacity * 2;
+      char* const tmp = new char[new_capacity];
       for (std::size_t i = 0; i < length; ++i)
       {
         tmp[i] = buf[i];
@@ -63,7 +64,7 @@ char* chervov::lowerLatin(const char* src, char* dst)
   char* out = dst;
   for (const char* p = src; *p != '\0'; ++p, ++out)
   {
-    char c = *p;
+    const char c = *p;
     if (std::isupper(static_cast< unsigned char >(c)))
     {
       *out = static_cast< char >(std::tolower(static_cast< unsigned char >(c)));
