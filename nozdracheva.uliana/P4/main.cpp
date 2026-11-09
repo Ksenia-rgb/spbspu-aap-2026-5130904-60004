@@ -69,6 +69,12 @@ int main()
   }
 
   str[n] = '\0';
+  if (n == 0)
+  {
+    delete[] str;
+    std::cerr << "Empty input\n";
+    return invalid_data;
+  }
 
   char* const res = new (std::nothrow) char[n + 1];
 
