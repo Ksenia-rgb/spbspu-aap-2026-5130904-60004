@@ -52,10 +52,10 @@ size_t sierra::AftMax::operator()() const
 int main()
 {
   int value = 0;
-  sierra::AftMax aftMax;
+  sierra::AftMax counter;
   while ((std::cin >> value) && value != 0)
   {
-    aftMax(value);
+    counter(value);
   }
   if (!std::cin)
   {
@@ -64,7 +64,7 @@ int main()
   }
   try
   {
-    std::cout << aftMax() << '\n';
+    std::cout << counter() << '\n';
   }
   catch (const std::exception & e)
   {
