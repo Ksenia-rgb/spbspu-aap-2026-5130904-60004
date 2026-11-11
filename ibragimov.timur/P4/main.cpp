@@ -38,7 +38,7 @@ int main()
       len++;
     }
 
-    if (len == 0 && std::cin.eof()) {
+    if (len == 0) {
       throw std::invalid_argument("Input is empty");
     }
     arr[len] = '\0';
