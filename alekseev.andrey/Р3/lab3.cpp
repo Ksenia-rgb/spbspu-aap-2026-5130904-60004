@@ -4,8 +4,6 @@
 
 namespace alekseev
 {
-  const long long MAX_FIXED = 10000;
-
   bool readSize(std::istream & in, int & rows, int & cols)
   {
     if (!(in >> rows >> cols))
@@ -27,21 +25,23 @@ namespace alekseev
     return true;
   }
 
-  bool noExtraData(std::istream & in)
+  bool hasNoExtraData(std::istream & in)
   {
     in >> std::ws;
     return in.peek() == std::char_traits< char >::eof();
   }
 
-  int countLocMin(const int * m, int rows, int cols)
+  int countLocalMinima(const int * matrix, int rows, int cols)
   {
     int result = 0;
+
     for (int i = 1; i < rows - 1; ++i)
     {
       for (int j = 1; j < cols - 1; ++j)
       {
-        int v = m[i * cols + j];
+        const int current = matrix[i * cols + j];
         bool isMin = true;
+
         for (int di = -1; di <= 1 && isMin; ++di)
         {
           for (int dj = -1; dj <= 1; ++dj)
@@ -50,13 +50,14 @@ namespace alekseev
             {
               continue;
             }
-            if (m[(i + di) * cols + (j + dj)] <= v)
+            if (matrix[(i + di) * cols + (j + dj)] <= current)
             {
               isMin = false;
               break;
             }
           }
         }
+
         if (isMin)
         {
           ++result;
@@ -75,14 +76,14 @@ int main(int argc, char ** argv)
     return 1;
   }
 
-  int num = 0;
+  int mode = 0;
   if (argv[1][0] == '1' && argv[1][1] == '\0')
   {
-    num = 1;
+    mode = 1;
   }
   else if (argv[1][0] == '2' && argv[1][1] == '\0')
   {
-    num = 2;
+    mode = 2;
   }
   else
   {
@@ -105,45 +106,45 @@ int main(int argc, char ** argv)
     return 2;
   }
 
-  long long count = static_cast< long long >(rows) * cols;
-  int result = 0;
+  const long long count = static_cast< long long >(rows) * cols;
+  const long long maxFixed = 10000;
 
-  if (num == 1)
+  int fixed[maxFixed] = {};
+  int * dynamic = nullptr;
+  int * matrix = nullptr;
+
+  if (mode == 1)
   {
-    if (count > alekseev::MAX_FIXED)
+    if (count > maxFixed)
     {
       std::cerr << "Matrix is too large for fixed array\n";
       return 2;
     }
-    int fixed[alekseev::MAX_FIXED] = {};
-    if (!alekseev::readElements(input, fixed, count) || !alekseev::noExtraData(input))
-    {
-      std::cerr << "Invalid matrix data\n";
-      return 2;
-    }
-    result = alekseev::countLocMin(fixed, rows, cols);
+    matrix = fixed;
   }
   else
   {
-    int * dynamic = nullptr;
     try
     {
       dynamic = new int[count];
+      matrix = dynamic;
     }
     catch (const std::bad_alloc &)
     {
       std::cerr << "Cannot allocate memory\n";
       return 2;
     }
-    if (!alekseev::readElements(input, dynamic, count) || !alekseev::noExtraData(input))
-    {
-      delete[] dynamic;
-      std::cerr << "Invalid matrix data\n";
-      return 2;
-    }
-    result = alekseev::countLocMin(dynamic, rows, cols);
-    delete[] dynamic;
   }
+
+  if (!alekseev::readElements(input, matrix, count) || !alekseev::hasNoExtraData(input))
+  {
+    delete[] dynamic;
+    std::cerr << "Invalid matrix data\n";
+    return 2;
+  }
+
+  const int result = alekseev::countLocalMinima(matrix, rows, cols);
+  delete[] dynamic;
 
   std::ofstream output(argv[3]);
   if (!output)
@@ -151,6 +152,7 @@ int main(int argc, char ** argv)
     std::cerr << "Cannot open output file\n";
     return 2;
   }
+
   if (count == 0)
   {
     output << "0 0\n";
@@ -161,4 +163,3 @@ int main(int argc, char ** argv)
   }
   return 0;
 }
-// fixed
