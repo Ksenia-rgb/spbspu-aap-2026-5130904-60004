@@ -17,6 +17,7 @@ private:
   int prev_ = 0;
   size_t count_ = 0;
 };
+
 }
 int main() {
   zabrodotsky::SignChangeCounter counter;
