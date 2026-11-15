@@ -3,26 +3,29 @@
 
 namespace zabrodotsky
 {
-struct SignChangeCounter
-{
-  void operator()(int next)
+  struct SignChangeCounter
   {
-    if ((prev_ < 0 && next > 0) || (prev_ > 0 && next < 0))
+    void operator()(int next)
     {
-      if (count_ == static_cast<size_t>(-1))
+      if ((prev_ < 0 && next > 0) || (prev_ > 0 && next < 0))
       {
-        throw std::overflow_error("Overflow");
+        if (count_ == static_cast< size_t >(-1))
+        {
+          throw std::overflow_error("Overflow");
+        }
+        ++count_;
       }
-      ++count_;
+      prev_ = next;
     }
-    prev_ = next;
-  }
-  size_t operator()() const { return count_; }
+    size_t operator()() const
+    {
+      return count_;
+    }
 
-private:
-  int prev_ = 0;
-  size_t count_ = 0;
-};
+  private:
+    int prev_ = 0;
+    size_t count_ = 0;
+  };
 }
 int main()
 {
