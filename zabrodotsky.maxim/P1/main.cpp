@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdexcept>
+
 namespace zabrodotsky {
 struct SignChangeCounter {
   void operator()(int next) {
