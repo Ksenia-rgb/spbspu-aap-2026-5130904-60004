@@ -1,41 +1,51 @@
 #include <iostream>
+#include <stdexcept>
 namespace zabrodotsky
 {
-  int solve();
+    struct SignChangeCounter
+    {
+        void operator()(int next)
+        {
+            if ((prev_ < 0 && next > 0) || (prev_ > 0 && next < 0))
+            {
+                if (count_ == static_cast<size_t>(-1))
+                {
+                    throw std::overflow_error("Overflow");
+                }
+                ++count_;
+            }
+            prev_ = next;
+        }
+        size_t operator()() const
+        {
+            return count_;
+        }
+    private:
+        int prev_ = 0;
+        size_t count_ = 0;
+    };
 }
 int main()
 {
-  const int res = zabrodotsky::solve();
-  if (res < 0)
-  {
-    return -res;
-  }
-  std::cout << res << "\n";
-  return 0;
-}
-namespace zabrodotsky
-{
-  int solve()
-  {
-    long long prev = 0;
-    long long curr = 0;
-    int count = 0;
-    if (!(std::cin >> prev) || prev == 0)
+    zabrodotsky::SignChangeCounter counter;
+    int value = 0;
+    try
     {
-      return prev == 0 ? -2 : -1;
+        while (std::cin >> value && value != 0)
+        {
+            counter(value);
+        }
     }
-    while (std::cin >> curr && curr != 0)
+    catch (const std::overflow_error& e)
     {
-      if ((prev < 0 && curr > 0) || (prev > 0 && curr < 0))
-      {
-        count++;
-      }
-      prev = curr;
+        std::cerr << e.what() << "\n";
+        return 2;
     }
-    if (!std::cin.eof() && std::cin.fail())
+    if (!std::cin)
     {
-      return -1;
+        std::cerr << "Invalid input\n";
+        return 1;
     }
-    return count;
-  }
+    std::cout << counter() << "\n";
+    return 0;
 }
