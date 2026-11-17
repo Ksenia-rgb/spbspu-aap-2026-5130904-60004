@@ -31,27 +31,27 @@ namespace sierra {
 
   size_t numRowLongestSeries(const int* matrix, size_t rows, size_t cols)
   {
-    size_t bestRow = 0;
-    size_t bestLen = 0;
+    size_t best_row = 0;
+    size_t best_len = 0;
     for (size_t i = 0; i < rows; ++i) {
       size_t len = 0;
-      size_t maxLen = 0;
+      size_t max_len = 0;
       for (size_t j = 0; j < cols; ++j) {
         if (j > 0 && matrix[i * cols + j] == matrix[i * cols + j - 1]) {
           ++len;
         } else {
           len = 1;
         }
-        if (len > maxLen) {
-          maxLen = len;
+        if (len > max_len) {
+          max_len = len;
         }
       }
-      if (maxLen > bestLen) {
-        bestLen = maxLen;
-        bestRow = i + 1;
+      if (max_len > best_len) {
+        best_len = max_len;
+        best_row = i + 1;
       }
     }
-    return bestRow;
+    return best_row;
   }
 }
 
