@@ -5,18 +5,22 @@
 #include <limits>
 #include <new>
 
-namespace ermolaeva {
+namespace ermolaeva
+{
 
 std::size_t countDiffLat(const char *str) {
-  constexpr int alphabet_size = 26;
-  char seen[alphabet_size] = {};
+  constexpr int alphabetSize = 26;
+  char seen[alphabetSize] = {};
   std::size_t count = 0;
 
-  for (; *str != '\0'; ++str) {
+  for (; *str != '\0'; ++str)
+  {
     const unsigned char c = static_cast<unsigned char>(*str);
-    if (std::isalpha(c)) {
+    if (std::isalpha(c))
+    {
       const int idx = std::tolower(c) - 'a';
-      if (idx >= 0 && idx < alphabet_size && !seen[idx]) {
+      if (idx >= 0 && idx < alphabetSize && !seen[idx])
+      {
         seen[idx] = 1;
         ++count;
       }
@@ -26,31 +30,36 @@ std::size_t countDiffLat(const char *str) {
 }
 
 char *readLine(std::istream &in) {
-  constexpr std::size_t initial_capacity = 16;
-  std::size_t capacity = initial_capacity;
+  constexpr std::size_t initialCapacity = 16;
+  std::size_t capacity = initialCapacity;
   std::size_t size = 0;
   char *buf = new (std::nothrow) char[capacity];
-  if (buf == nullptr) {
+  if (buf == nullptr)
+  {
     return nullptr;
   }
 
   char c = '\0';
-  while (in.get(c) && c != '\n') {
-    if (size + 1 >= capacity) {
-      if (capacity > std::numeric_limits<std::size_t>::max() / 2) {
+  while (in.get(c) && c != '\n')
+  {
+    if (size + 1 >= capacity)
+    {
+      if (capacity > std::numeric_limits<std::size_t>::max() / 2)
+      {
         delete[] buf;
         return nullptr;
       }
-      const std::size_t new_capacity = capacity * 2;
-      char *const bigger = new (std::nothrow) char[new_capacity];
-      if (bigger == nullptr) {
+      const std::size_t newCapacity = capacity * 2;
+      char *const bigger = new (std::nothrow) char[newCapacity];
+      if (bigger == nullptr)
+      {
         delete[] buf;
         return nullptr;
       }
       std::memcpy(bigger, buf, size);
       delete[] buf;
       buf = bigger;
-      capacity = new_capacity;
+      capacity = newCapacity;
     }
     buf[size++] = c;
   }
@@ -62,11 +71,13 @@ char *readLine(std::istream &in) {
 
 int main() {
   char *const line = ermolaeva::readLine(std::cin);
-  if (line == nullptr) {
+  if (line == nullptr)
+  {
     std::cerr << "Error: not enough memory to read the string\n";
     return 1;
   }
-  if (line[0] == '\0' && std::cin.eof()) {
+  if (line[0] == '\0' && std::cin.eof())
+  {
     std::cerr << "Error: empty input\n";
     delete[] line;
     return 1;
