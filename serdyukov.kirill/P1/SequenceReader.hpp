@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SEQUENCE_READER_HPP
+#define SEQUENCE_READER_HPP
 
 namespace serdyukov {
   struct SequenceReader {
@@ -11,3 +12,4 @@ namespace serdyukov {
   };
 
 }
+#endif

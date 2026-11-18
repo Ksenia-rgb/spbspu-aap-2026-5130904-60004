@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GREAT_LESS_COUNTER_HPP
+#define GREAT_LESS_COUNTER_HPP
 #include "SequenceReader.hpp"
 
 namespace serdyukov {
@@ -8,3 +9,4 @@ namespace serdyukov {
   };
 
 }
+#endif
