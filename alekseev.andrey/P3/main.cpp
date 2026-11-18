@@ -51,7 +51,7 @@ int countLocalMinima(const int *matrix, int rows, int cols) {
   }
   return result;
 }
-} // namespace alekseev
+}
 
 int main(int argc, char **argv) {
   if (argc != 4) {
