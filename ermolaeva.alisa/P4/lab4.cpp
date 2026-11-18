@@ -58,7 +58,7 @@ char * read_line(std::istream & in)
     return buf;
 }
 
-} 
+}
 
 int main()
 {
