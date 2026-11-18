@@ -56,7 +56,7 @@ char *read_line(std::istream &in) {
   return buf;
 }
 
-} // namespace ermolaeva
+}
 
 int main() {
   char *line = ermolaeva::read_line(std::cin);
