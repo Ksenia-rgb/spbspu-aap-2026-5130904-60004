@@ -3,14 +3,14 @@
 #include <new>
 
 namespace alekseev {
-bool readSize(std::istream &in, int &rows, int &cols) {
+bool readSize(std::istream& in, int& rows, int& cols) {
   if (!(in >> rows >> cols)) {
     return false;
   }
   return rows >= 0 && cols >= 0;
 }
 
-bool readElements(std::istream &in, int *data, long long count) {
+bool readElements(std::istream& in, int* data, long long count) {
   for (long long i = 0; i < count; ++i) {
     if (!(in >> data[i])) {
       return false;
@@ -19,12 +19,12 @@ bool readElements(std::istream &in, int *data, long long count) {
   return true;
 }
 
-bool hasNoExtraData(std::istream &in) {
+bool hasNoExtraData(std::istream& in) {
   in >> std::ws;
   return in.peek() == std::char_traits<char>::eof();
 }
 
-int countLocalMinima(const int *matrix, int rows, int cols) {
+int countLocalMinima(const int* matrix, int rows, int cols) {
   int result = 0;
 
   for (int i = 1; i < rows - 1; ++i) {
@@ -53,7 +53,7 @@ int countLocalMinima(const int *matrix, int rows, int cols) {
 }
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
   if (argc != 4) {
     std::cerr << "Usage: " << argv[0] << " num input output\n";
     return 1;
@@ -86,8 +86,8 @@ int main(int argc, char **argv) {
   const long long maxFixed = 10000;
 
   int fixed[maxFixed] = {};
-  int *dynamic = nullptr;
-  int *matrix = nullptr;
+  int* dynamic = nullptr;
+  int* matrix = nullptr;
 
   if (mode == 1) {
     if (count > maxFixed) {
@@ -99,7 +99,7 @@ int main(int argc, char **argv) {
     try {
       dynamic = new int[count];
       matrix = dynamic;
-    } catch (const std::bad_alloc &) {
+    } catch (const std::bad_alloc&) {
       std::cerr << "Cannot allocate memory\n";
       return 2;
     }
