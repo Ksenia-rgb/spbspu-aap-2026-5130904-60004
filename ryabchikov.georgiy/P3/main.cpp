@@ -3,64 +3,64 @@
 
 namespace ryabchikov
 {
-  void processMatrix(int *data, int rows, int cols)
-  {
-    int top = 0;
-    int bottom = rows - 1;
-    int left = 0;
-    int right = cols - 1;
-    int step = 1;
+void processMatrix(int *data, int rows, int cols)
+{
+  int top = 0;
+  int bottom = rows - 1;
+  int left = 0;
+  int right = cols - 1;
+  int step = 1;
 
-    while (top <= bottom && left <= right)
+  while (top <= bottom && left <= right)
+  {
+    for (int i = bottom; i >= top; --i)
     {
-      for (int i = bottom; i >= top; --i)
+      data[i * cols + left] -= step;
+      ++step;
+    }
+    ++left;
+
+    if (left <= right)
+    {
+      for (int j = left; j <= right; ++j)
       {
-        data[i * cols + left] -= step;
+        data[top * cols + j] -= step;
         ++step;
       }
-      ++left;
-
-      if (left <= right)
-      {
-        for (int j = left; j <= right; ++j)
-        {
-          data[top * cols + j] -= step;
-          ++step;
-        }
-        ++top;
-      }
-
-      if (top <= bottom)
-      {
-        for (int i = top; i <= bottom; ++i)
-        {
-          data[i * cols + right] -= step;
-          ++step;
-        }
-        --right;
-      }
-
-      if (left <= right)
-      {
-        for (int j = right; j >= left; --j)
-        {
-          data[bottom * cols + j] -= step;
-          ++step;
-        }
-        --bottom;
-      }
+      ++top;
     }
-  }
 
-  void writeMatrix(std::ostream &out, const int *data, int rows, int cols)
-  {
-    out << rows << ' ' << cols;
-    for (int i = 0; i < rows * cols; ++i)
+    if (top <= bottom)
     {
-      out << ' ' << data[i];
+      for (int i = top; i <= bottom; ++i)
+      {
+        data[i * cols + right] -= step;
+        ++step;
+      }
+      --right;
     }
-    out << '\n';
+
+    if (left <= right)
+    {
+      for (int j = right; j >= left; --j)
+      {
+        data[bottom * cols + j] -= step;
+        ++step;
+      }
+      --bottom;
+    }
   }
+}
+
+void writeMatrix(std::ostream &out, const int *data, int rows, int cols)
+{
+  out << rows << ' ' << cols;
+  for (int i = 0; i < rows * cols; ++i)
+  {
+    out << ' ' << data[i];
+  }
+  out << '\n';
+}
 }
 
 int main(int argc, char *argv[])
