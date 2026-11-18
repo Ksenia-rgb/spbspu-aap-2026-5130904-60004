@@ -7,15 +7,16 @@
 
 namespace ermolaeva {
 
-std::size_t count_diff_lat(const char *str) {
-  char seen[26] = {};
+std::size_t countDiffLat(const char *str) {
+  constexpr int alphabet_size = 26;
+  char seen[alphabet_size] = {};
   std::size_t count = 0;
 
   for (; *str != '\0'; ++str) {
-    unsigned char c = static_cast<unsigned char>(*str);
+    const unsigned char c = static_cast<unsigned char>(*str);
     if (std::isalpha(c)) {
-      int idx = std::tolower(c) - 'a';
-      if (idx >= 0 && idx < 26 && !seen[idx]) {
+      const int idx = std::tolower(c) - 'a';
+      if (idx >= 0 && idx < alphabet_size && !seen[idx]) {
         seen[idx] = 1;
         ++count;
       }
@@ -24,23 +25,24 @@ std::size_t count_diff_lat(const char *str) {
   return count;
 }
 
-char *read_line(std::istream &in) {
-  std::size_t capacity = 16;
+char *readLine(std::istream &in) {
+  constexpr std::size_t initial_capacity = 16;
+  std::size_t capacity = initial_capacity;
   std::size_t size = 0;
   char *buf = new (std::nothrow) char[capacity];
   if (buf == nullptr) {
     return nullptr;
   }
 
-  char c;
+  char c = '\0';
   while (in.get(c) && c != '\n') {
     if (size + 1 >= capacity) {
       if (capacity > std::numeric_limits<std::size_t>::max() / 2) {
         delete[] buf;
         return nullptr;
       }
-      std::size_t new_capacity = capacity * 2;
-      char *bigger = new (std::nothrow) char[new_capacity];
+      const std::size_t new_capacity = capacity * 2;
+      char *const bigger = new (std::nothrow) char[new_capacity];
       if (bigger == nullptr) {
         delete[] buf;
         return nullptr;
@@ -56,10 +58,10 @@ char *read_line(std::istream &in) {
   return buf;
 }
 
-}
+} // namespace ermolaeva
 
 int main() {
-  char *line = ermolaeva::read_line(std::cin);
+  char *const line = ermolaeva::readLine(std::cin);
   if (line == nullptr) {
     std::cerr << "Error: not enough memory to read the string\n";
     return 1;
@@ -70,7 +72,7 @@ int main() {
     return 1;
   }
 
-  std::cout << ermolaeva::count_diff_lat(line) << '\n';
+  std::cout << ermolaeva::countDiffLat(line) << '\n';
   delete[] line;
   return 0;
 }
