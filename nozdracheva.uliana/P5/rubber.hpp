@@ -7,13 +7,13 @@ namespace nozdracheva
   class Rubber: public Shape
   {
   private:
-    double outerRadius_;
-    double innerRadius_;
-    point_t outerCenter_;
-    point_t innerCenter_;
+    double outer_radius_;
+    double inner_radius_;
+    point_t outer_center_;
+    point_t inner_center_;
 
   public:
-    Rubber(double outerRadius, double innerRadius, const point_t& outerCenter, const point_t& innerCenter);
+    Rubber(double outer_radius, double inner_radius, const point_t& outer_center, const point_t& inner_center);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(const point_t& point) override;

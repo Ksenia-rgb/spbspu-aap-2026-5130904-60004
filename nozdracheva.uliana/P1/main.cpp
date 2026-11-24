@@ -22,9 +22,9 @@ namespace nozdracheva
     SubMaxCounter();
 
   private:
-    int max1;
-    int max2;
-    int c;
+    int max1_;
+    int max2_;
+    int c_;
 
     void next(int n) override;
     int result() const override;
@@ -66,39 +66,39 @@ namespace nozdracheva
   }
 
   SubMaxCounter::SubMaxCounter():
-    max1(INT_MIN),
-    max2(INT_MIN),
-    c(0)
+    max1_(INT_MIN),
+    max2_(INT_MIN),
+    c_(0)
   {}
 
   void SubMaxCounter::next(int n)
   {
-    if (c == INT_MAX)
+    if (c_ == INT_MAX)
     {
       throw std::overflow_error("Sequence is too long");
     }
 
-    ++c;
+    ++c_;
 
-    if (n >= max1)
+    if (n >= max1_)
     {
-      max2 = max1;
-      max1 = n;
+      max2_ = max1_;
+      max1_ = n;
     }
-    else if (n > max2)
+    else if (n > max2_)
     {
-      max2 = n;
+      max2_ = n;
     }
   }
 
   int SubMaxCounter::result() const
   {
-    if (c < 2)
+    if (c_ < 2)
     {
       throw std::overflow_error("Sequence is too short");
     }
 
-    return max2;
+    return max2_;
   }
 
   int findSubMax()

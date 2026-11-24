@@ -3,19 +3,19 @@
 #include <stdexcept>
 
 nozdracheva::Rubber::Rubber(
-    double outerRadius, double innerRadius, const point_t& outerCenter, const point_t& innerCenter):
-  outerRadius_(outerRadius),
-  innerRadius_(innerRadius),
-  outerCenter_(outerCenter),
-  innerCenter_(innerCenter)
+    double outer_radius, double inner_radius, const point_t& outer_center, const point_t& inner_center):
+  outer_radius_(outer_radius),
+  inner_radius_(inner_radius),
+  outer_center_(outer_center),
+  inner_center_(inner_center)
 {
-  double dx = outerCenter_.x - innerCenter_.x;
-  double dy = outerCenter_.y - innerCenter_.y;
-  double distance = std::hypot(dx, dy);
+  const double dx = outer_center_.x - inner_center_.x;
+  const double dy = outer_center_.y - inner_center_.y;
+  const double distance = std::hypot(dx, dy);
 
-  if (!std::isfinite(outerRadius_) || !std::isfinite(innerRadius_) || !std::isfinite(outerCenter_.x)
-      || !std::isfinite(outerCenter_.y) || !std::isfinite(innerCenter_.x) || !std::isfinite(innerCenter_.y)
-      || outerRadius_ <= 0 || innerRadius_ <= 0 || distance <= 0 || distance + innerRadius_ >= outerRadius_)
+  if (!std::isfinite(outer_radius_) || !std::isfinite(inner_radius_) || !std::isfinite(outer_center_.x)
+      || !std::isfinite(outer_center_.y) || !std::isfinite(inner_center_.x) || !std::isfinite(inner_center_.y)
+      || outer_radius_ <= 0 || inner_radius_ <= 0 || distance <= 0 || distance + inner_radius_ >= outer_radius_)
   {
     throw std::invalid_argument("Invalid rubber");
   }
@@ -24,25 +24,25 @@ nozdracheva::Rubber::Rubber(
 double nozdracheva::Rubber::getArea() const
 {
   const double pi = std::acos(-1.0);
-  return pi * (outerRadius_ * outerRadius_ - innerRadius_ * innerRadius_);
+  return pi * (outer_radius_ * outer_radius_ - inner_radius_ * inner_radius_);
 }
 
 nozdracheva::rectangle_t nozdracheva::Rubber::getFrameRect() const
 {
-  return {2 * outerRadius_, 2 * outerRadius_, outerCenter_};
+  return {2 * outer_radius_, 2 * outer_radius_, outer_center_};
 }
 
 void nozdracheva::Rubber::move(const point_t& point)
 {
-  move(point.x - innerCenter_.x, point.y - innerCenter_.y);
+  move(point.x - inner_center_.x, point.y - inner_center_.y);
 }
 
 void nozdracheva::Rubber::move(double dx, double dy)
 {
-  outerCenter_.x += dx;
-  outerCenter_.y += dy;
-  innerCenter_.x += dx;
-  innerCenter_.y += dy;
+  outer_center_.x += dx;
+  outer_center_.y += dy;
+  inner_center_.x += dx;
+  inner_center_.y += dy;
 }
 
 void nozdracheva::Rubber::scale(double k)
@@ -51,8 +51,8 @@ void nozdracheva::Rubber::scale(double k)
   {
     throw std::invalid_argument("Invalid scale");
   }
-  outerCenter_.x = innerCenter_.x + (outerCenter_.x - innerCenter_.x) * k;
-  outerCenter_.y = innerCenter_.y + (outerCenter_.y - innerCenter_.y) * k;
-  outerRadius_ *= k;
-  innerRadius_ *= k;
+  outer_center_.x = inner_center_.x + (outer_center_.x - inner_center_.x) * k;
+  outer_center_.y = inner_center_.y + (outer_center_.y - inner_center_.y) * k;
+  outer_radius_ *= k;
+  inner_radius_ *= k;
 }

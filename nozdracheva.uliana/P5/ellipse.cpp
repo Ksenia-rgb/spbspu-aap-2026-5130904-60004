@@ -2,13 +2,13 @@
 #include <cmath>
 #include <stdexcept>
 
-nozdracheva::Ellipse::Ellipse(double radiusX, double radiusY, const point_t& pos):
-  radiusX_(radiusX),
-  radiusY_(radiusY),
+nozdracheva::Ellipse::Ellipse(double radius_x, double radius_y, const point_t& pos):
+  radius_x_(radius_x),
+  radius_y_(radius_y),
   pos_(pos)
 {
-  if (!std::isfinite(radiusX_) || !std::isfinite(radiusY_) || !std::isfinite(pos_.x) || !std::isfinite(pos_.y)
-      || radiusX_ <= 0 || radiusY_ <= 0)
+  if (!std::isfinite(radius_x_) || !std::isfinite(radius_y_) || !std::isfinite(pos_.x) || !std::isfinite(pos_.y)
+      || radius_x_ <= 0 || radius_y_ <= 0)
   {
     throw std::invalid_argument("Invalid ellipse");
   }
@@ -17,12 +17,12 @@ nozdracheva::Ellipse::Ellipse(double radiusX, double radiusY, const point_t& pos
 double nozdracheva::Ellipse::getArea() const
 {
   const double pi = std::acos(-1.0);
-  return pi * radiusX_ * radiusY_;
+  return pi * radius_x_ * radius_y_;
 }
 
 nozdracheva::rectangle_t nozdracheva::Ellipse::getFrameRect() const
 {
-  return {2 * radiusX_, 2 * radiusY_, pos_};
+  return {2 * radius_x_, 2 * radius_y_, pos_};
 }
 
 void nozdracheva::Ellipse::move(const point_t& point)
@@ -42,6 +42,6 @@ void nozdracheva::Ellipse::scale(double k)
   {
     throw std::invalid_argument("Invalid scale");
   }
-  radiusX_ *= k;
-  radiusY_ *= k;
+  radius_x_ *= k;
+  radius_y_ *= k;
 }
