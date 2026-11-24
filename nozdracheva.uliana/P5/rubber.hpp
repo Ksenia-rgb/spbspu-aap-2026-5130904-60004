@@ -1,4 +1,5 @@
-#pragma once
+#ifndef RUBBER_HPP
+#define RUBBER_HPP
 #include "shape.hpp"
 
 namespace nozdracheva {
@@ -19,3 +20,5 @@ namespace nozdracheva {
         void scale(double k) override;
     };
 }
+
+#endif

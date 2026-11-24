@@ -1,4 +1,5 @@
-#pragma once
+#ifndef BASE_TYPES_HPP
+#define BASE_TYPES_HPP
 
 namespace nozdracheva {
     struct point_t {
@@ -12,3 +13,5 @@ namespace nozdracheva {
         point_t pos;
     };
 }
+
+#endif

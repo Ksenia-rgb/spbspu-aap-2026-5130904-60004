@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ELLIPSE_HPP
+#define ELLIPSE_HPP
 #include "shape.hpp"
 
 namespace nozdracheva {
@@ -17,3 +18,5 @@ namespace nozdracheva {
         void scale(double k) override;
     };
 }
+
+#endif

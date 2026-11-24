@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SHAPE_HPP
+#define SHAPE_HPP
 #include "base-types.hpp"
 
 namespace nozdracheva {
@@ -12,3 +13,5 @@ namespace nozdracheva {
         virtual void scale(double k) = 0;
     };
 }
+
+#endif
