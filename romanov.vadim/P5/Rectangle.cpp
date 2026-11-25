@@ -25,12 +25,12 @@ namespace romanov
         }
       }
     }
-    double minX = std::min({a.getX(), b.getX(), c.getX(), d.getX()});
-    double minY = std::min({a.getY(), b.getY(), c.getY(), d.getY()});
-    double maxX = std::max({a.getX(), b.getX(), c.getX(), d.getX()});
-    double maxY = std::max({a.getY(), b.getY(), c.getY(), d.getY()});
-    width_ = maxX - minX;
-    height_ = maxY - minY;
+    double min_x = std::min({a.getX(), b.getX(), c.getX(), d.getX()});
+    double min_y = std::min({a.getY(), b.getY(), c.getY(), d.getY()});
+    double max_x = std::max({a.getX(), b.getX(), c.getX(), d.getX()});
+    double max_y = std::max({a.getY(), b.getY(), c.getY(), d.getY()});
+    width_ = max_x - min_x;
+    height_ = max_y - min_y;
     const double meas_err = 1e-9;
     if (width_ <= meas_err || height_ <= meas_err)
     {
@@ -38,15 +38,15 @@ namespace romanov
     }
     for (int i = 0; i < 4; ++i)
     {
-      bool validX = (std::abs(pts[i].getX() - minX) < meas_err) || (std::abs(pts[i].getX() - maxX) < meas_err);
-      bool validY = (std::abs(pts[i].getY() - minY) < meas_err) || (std::abs(pts[i].getY() - maxY) < meas_err);
-      if (!validX || !validY)
+      bool valid_x = (std::abs(pts[i].getX() - min_x) < meas_err) || (std::abs(pts[i].getX() - max_x) < meas_err);
+      bool valid_y = (std::abs(pts[i].getY() - min_y) < meas_err) || (std::abs(pts[i].getY() - max_y) < meas_err);
+      if (!valid_x || !valid_y)
       {
         throw std::invalid_argument("Sides must be parallel to coordinate axes");
       }
     }
-    pos_.setX((minX + maxX) / 2.0);
-    pos_.setY((minY + maxY) / 2.0);
+    pos_.setX((min_x + max_x) / 2.0);
+    pos_.setY((min_y + max_y) / 2.0);
   }
 
   double Rectangle::getArea() const
@@ -62,10 +62,10 @@ namespace romanov
     pos_.setX(pos_.getX() + dx);
     pos_.setY(pos_.getY() + dy);
   }
-  void Rectangle::move(const point_t& newCenter)
+  void Rectangle::move(const point_t& new_center)
   {
-    double dx = (newCenter.getX() - pos_.getX());
-    double dy = (newCenter.getY() - pos_.getY());
+    double dx = (new_center.getX() - pos_.getX());
+    double dy = (new_center.getY() - pos_.getY());
     move(dx, dy);
   }
   void Rectangle::scale(double k)

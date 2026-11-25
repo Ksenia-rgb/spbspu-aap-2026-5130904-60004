@@ -15,7 +15,7 @@ namespace romanov
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(double dx, double dy) override;
-    void move(const point_t& newCenter) override;
+    void move(const point_t& new_center) override;
     void scale(double k) override;
   };
 

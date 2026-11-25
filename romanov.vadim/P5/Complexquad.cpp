@@ -45,11 +45,11 @@ namespace romanov
 
   rectangle_t Complexquad::getFrameRect() const
   {
-    double minX = std::min({pts_[0].getX(), pts_[1].getX(), pts_[2].getX(), pts_[3].getX()});
-    double minY = std::min({pts_[0].getY(), pts_[1].getY(), pts_[2].getY(), pts_[3].getY()});
-    double maxX = std::max({pts_[0].getX(), pts_[1].getX(), pts_[2].getX(), pts_[3].getX()});
-    double maxY = std::max({pts_[0].getY(), pts_[1].getY(), pts_[2].getY(), pts_[3].getY()});
-    return rectangle_t(maxX - minX, maxY - minY, point_t((minX + maxX) / 2.0, (minY + maxY) / 2.0));
+    double min_x = std::min({pts_[0].getX(), pts_[1].getX(), pts_[2].getX(), pts_[3].getX()});
+    double min_y = std::min({pts_[0].getY(), pts_[1].getY(), pts_[2].getY(), pts_[3].getY()});
+    double max_x = std::max({pts_[0].getX(), pts_[1].getX(), pts_[2].getX(), pts_[3].getX()});
+    double max_y = std::max({pts_[0].getY(), pts_[1].getY(), pts_[2].getY(), pts_[3].getY()});
+    return rectangle_t(max_x - min_x, max_y - min_y, point_t((min_x + max_x) / 2.0, (min_y + max_y) / 2.0));
   }
 
   void Complexquad::move(double dx, double dy)
@@ -63,9 +63,9 @@ namespace romanov
     pos_.setY(pos_.getY() + dy);
   }
 
-  void Complexquad::move(const point_t& newCenter)
+  void Complexquad::move(const point_t& new_center)
   {
-    move(newCenter.getX() - pos_.getX(), newCenter.getY() - pos_.getY());
+    move(new_center.getX() - pos_.getX(), new_center.getY() - pos_.getY());
   }
 
   void Complexquad::scale(double k)

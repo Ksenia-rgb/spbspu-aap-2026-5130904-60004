@@ -56,22 +56,22 @@ namespace romanov
 
   void Polygon::calculatePos()
   {
-    double signedArea = 0.0, cx = 0.0, cy = 0.0;
+    double signed_area = 0.0, cx = 0.0, cy = 0.0;
     for (unsigned int i = 0; i < size_; ++i)
     {
       unsigned int j = (i + 1) % size_;
       double cross = vertices_[i].getX() * vertices_[j].getY() - vertices_[j].getX() * vertices_[i].getY();
-      signedArea += cross;
+      signed_area += cross;
       cx += (vertices_[i].getX() + vertices_[j].getX()) * cross;
       cy += (vertices_[i].getY() + vertices_[j].getY()) * cross;
     }
-    signedArea /= 2.0;
-    if (std::abs(signedArea) < 1e-9)
+    signed_area /= 2.0;
+    if (std::abs(signed_area) < 1e-9)
     {
       throw std::invalid_argument("Degenerate polygon");
     }
-    pos_.setX(cx / (6.0 * signedArea));
-    pos_.setY(cy / (6.0 * signedArea));
+    pos_.setX(cx / (6.0 * signed_area));
+    pos_.setY(cy / (6.0 * signed_area));
   }
 
   double Polygon::getArea() const
@@ -87,31 +87,31 @@ namespace romanov
 
   rectangle_t Polygon::getFrameRect() const
   {
-    double minX = std::numeric_limits< double >::max();
-    double minY = std::numeric_limits< double >::max();
-    double maxX = std::numeric_limits< double >::lowest();
-    double maxY = std::numeric_limits< double >::lowest();
+    double min_x = std::numeric_limits< double >::max();
+    double min_y = std::numeric_limits< double >::max();
+    double max_x = std::numeric_limits< double >::lowest();
+    double max_y = std::numeric_limits< double >::lowest();
 
     for (unsigned int i = 0; i < size_; ++i)
     {
-      if (vertices_[i].getX() < minX)
+      if (vertices_[i].getX() < min_x)
       {
-        minX = vertices_[i].getX();
+        min_x = vertices_[i].getX();
       }
-      if (vertices_[i].getY() < minY)
+      if (vertices_[i].getY() < min_y)
       {
-        minY = vertices_[i].getY();
+        min_y = vertices_[i].getY();
       }
-      if (vertices_[i].getX() > maxX)
+      if (vertices_[i].getX() > max_x)
       {
-        maxX = vertices_[i].getX();
+        max_x = vertices_[i].getX();
       }
-      if (vertices_[i].getY() > maxY)
+      if (vertices_[i].getY() > max_y)
       {
-        maxY = vertices_[i].getY();
+        max_y = vertices_[i].getY();
       }
     }
-    return rectangle_t(maxX - minX, maxY - minY, point_t((minX + maxX) / 2.0, (minY + maxY) / 2.0));
+    return rectangle_t(max_x - min_x, max_y - min_y, point_t((min_x + max_x) / 2.0, (min_y + max_y) / 2.0));
   }
 
   void Polygon::move(double dx, double dy)
@@ -125,9 +125,9 @@ namespace romanov
     pos_.setY(pos_.getY() + dy);
   }
 
-  void Polygon::move(const point_t& newCenter)
+  void Polygon::move(const point_t& new_center)
   {
-    move(newCenter.getX() - pos_.getX(), newCenter.getY() - pos_.getY());
+    move(new_center.getX() - pos_.getX(), new_center.getY() - pos_.getY());
   }
 
   void Polygon::scale(double k)

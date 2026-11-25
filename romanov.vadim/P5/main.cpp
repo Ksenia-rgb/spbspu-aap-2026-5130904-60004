@@ -29,8 +29,8 @@ int main()
 
     shapes[1] = new Complexquad(point_t(0.0, 0.0), point_t(4.0, 4.0), point_t(4.0, 0.0), point_t(0.0, 4.0));
 
-    point_t pPts[5] = {point_t(0.0, 0.0), point_t(3.0, 0.0), point_t(3.0, 3.0), point_t(1.5, 4.0), point_t(0.0, 3.0)};
-    shapes[2] = new Polygon(pPts, 5);
+    point_t p_pts[5] = {point_t(0.0, 0.0), point_t(3.0, 0.0), point_t(3.0, 3.0), point_t(1.5, 4.0), point_t(0.0, 3.0)};
+    shapes[2] = new Polygon(p_pts, 5);
 
     std::cout << "--- BEFORE SCALING ---\n";
     printInfo(shapes, SHAPES_COUNT);
@@ -53,10 +53,10 @@ int main()
       return 1;
     }
 
-    point_t scalePoint(px, py);
+    point_t scale_point(px, py);
     for (unsigned int i = 0; i < SHAPES_COUNT; ++i)
     {
-      scaleRelativeToPoint(shapes[i], scalePoint, k);
+      scaleRelativeToPoint(shapes[i], scale_point, k);
     }
 
     std::cout << "--- AFTER SCALING ---\n";
@@ -87,48 +87,48 @@ namespace romanov
 
   void printInfo(Shape** shapes, unsigned int count)
   {
-    double totalArea = 0.0;
-    double minX = std::numeric_limits< double >::max();
-    double minY = std::numeric_limits< double >::max();
-    double maxX = std::numeric_limits< double >::lowest();
-    double maxY = std::numeric_limits< double >::lowest();
+    double total_area = 0.0;
+    double min_x = std::numeric_limits< double >::max();
+    double min_y = std::numeric_limits< double >::max();
+    double max_x = std::numeric_limits< double >::lowest();
+    double max_y = std::numeric_limits< double >::lowest();
 
     for (unsigned int i = 0; i < count; ++i)
     {
       double area = shapes[i]->getArea();
-      totalArea += area;
+      total_area += area;
       std::cout << "Shape " << i + 1 << " area: " << area << "\n";
 
       rectangle_t rect = shapes[i]->getFrameRect();
       std::cout << "Shape " << i + 1 << " frame rect: width=" << rect.getWidth() << ", height=" << rect.getHeight()
                 << ", pos=(" << rect.getPos().getX() << ", " << rect.getPos().getY() << ")\n";
 
-      double rMinX = rect.getPos().getX() - rect.getWidth() / 2.0;
-      double rMinY = rect.getPos().getY() - rect.getHeight() / 2.0;
-      double rMaxX = rect.getPos().getX() + rect.getWidth() / 2.0;
-      double rMaxY = rect.getPos().getY() + rect.getHeight() / 2.0;
+      double r_min_x = rect.getPos().getX() - rect.getWidth() / 2.0;
+      double r_min_y = rect.getPos().getY() - rect.getHeight() / 2.0;
+      double r_max_x = rect.getPos().getX() + rect.getWidth() / 2.0;
+      double r_max_y = rect.getPos().getY() + rect.getHeight() / 2.0;
 
-      if (rMinX < minX)
+      if (r_min_x < min_x)
       {
-        minX = rMinX;
+        min_x = r_min_x;
       }
-      if (rMinY < minY)
+      if (r_min_y < min_y)
       {
-        minY = rMinY;
+        min_y = r_min_y;
       }
-      if (rMaxX > maxX)
+      if (r_max_x > max_x)
       {
-        maxX = rMaxX;
+        max_x = r_max_x;
       }
-      if (rMaxY > maxY)
+      if (r_max_y > max_y)
       {
-        maxY = rMaxY;
+        max_y = r_max_y;
       }
     }
 
-    std::cout << "Total area: " << totalArea << "\n";
-    std::cout << "Global frame rect: width=" << (maxX - minX) << ", height=" << (maxY - minY) << ", pos=("
-              << ((minX + maxX) / 2.0) << ", " << ((minY + maxY) / 2.0) << ")\n\n";
+    std::cout << "Total area: " << total_area << "\n";
+    std::cout << "Global frame rect: width=" << (max_x - min_x) << ", height=" << (max_y - min_y) << ", pos=("
+              << ((min_x + max_x) / 2.0) << ", " << ((min_y + max_y) / 2.0) << ")\n\n";
   }
 
   void freeShapes(Shape** shapes, unsigned int count)
