@@ -14,12 +14,12 @@ public:
   {
     return y_;
   }
-  void setX(double x) 
+  void setX(double x)
   { 
     x_ = x;
   }
-  void setY(double y) 
-  { 
+  void setY(double y)
+  {
     y_ = y;
   }
 };
