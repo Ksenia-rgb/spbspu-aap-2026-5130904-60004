@@ -6,7 +6,7 @@ namespace romanov
 {
   const double kEpsilon = 1e-9;
   const double kTwo = 2.0;
-  const unsigned int kNumPoints = 4;
+  const int kNumPoints = 4;
   bool isSamePoint(const point_t& a, const point_t& b)
   {
     const double meas_err = kEpsilon;

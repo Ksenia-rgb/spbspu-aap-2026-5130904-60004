@@ -8,7 +8,7 @@ namespace romanov
   const double kHalf = 0.5;
   const double kEpsilon = 1e-9;
   const double kTwo = 2.0;
-  const unsigned int kNumPoints = 4;
+  const int kNumPoints = 4;
   double triangleArea(const point_t& a, const point_t& b, const point_t& c)
   {
     return kHalf
