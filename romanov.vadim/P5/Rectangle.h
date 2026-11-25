@@ -1,4 +1,5 @@
-#pragma once
+#ifndef RECTANGLE_H
+#define RECTANGLE_H
 #include "shape.hpp"
 namespace romanov {
 class Rectangle: public Shape
@@ -16,3 +17,4 @@ public:
 };
 
 }
+#endif

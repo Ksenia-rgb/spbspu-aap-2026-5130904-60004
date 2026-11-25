@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SHAPE_HPP
+#define SHAPE_HPP
 #include "base-types.hpp"
 namespace romanov {
 class Shape
@@ -13,3 +14,4 @@ public:
 };
 
 }
+#endif

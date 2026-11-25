@@ -1,4 +1,5 @@
-#pragma once
+#ifndef COMPLEXQUAD_H
+#define COMPLEXQUAD_H
 #include "shape.hpp"
 
 namespace romanov {
@@ -18,3 +19,4 @@ public:
 };
 
 }
+#endif

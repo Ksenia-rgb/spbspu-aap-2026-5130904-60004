@@ -1,4 +1,5 @@
-#pragma once
+#ifndef BASE_TYPES_HPP
+#define BASE_TYPES_HPP
 namespace romanov {
 class point_t
 {
@@ -37,3 +38,4 @@ public:
 };
 
 }
+#endif

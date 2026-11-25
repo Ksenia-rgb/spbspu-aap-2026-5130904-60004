@@ -1,4 +1,5 @@
-#pragma once
+#ifndef POLYGON_H
+#define POLYGON_H
 #include "shape.hpp"
 
 namespace romanov
@@ -26,3 +27,4 @@ public:
 };
 
 }
+#endif
