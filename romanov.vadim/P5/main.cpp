@@ -32,25 +32,12 @@ int main()
   }
   try
   {
-    const point_t r_pts[kRctPints] = {
-      point_t(k0, k0),
-      point_t(k2, k0),
-      point_t(k2, k2),
-      point_t(k0, k2)};
+    const point_t r_pts[kRctPints] = {point_t(k0, k0), point_t(k2, k0), point_t(k2, k2), point_t(k0, k2)};
     shapes[0] = new Rectangle(r_pts[0], r_pts[1], r_pts[2], r_pts[kShpsCnt]);
 
-    shapes[1] = new Complexquad(
-      point_t(k0, k0),
-      point_t(k4, k4),
-      point_t(k4, k0),
-      point_t(k0, k4));
+    shapes[1] = new Complexquad(point_t(k0, k0), point_t(k4, k4), point_t(k4, k0), point_t(k0, k4));
 
-    point_t p_pts[kPlgnPnts] = {
-      point_t(k0, k0),
-      point_t(k3, k0),
-      point_t(k3, k3),
-      point_t(k15, k4),
-      point_t(k0, k3)};
+    point_t p_pts[kPlgnPnts] = {point_t(k0, k0), point_t(k3, k0), point_t(k3, k3), point_t(k15, k4), point_t(k0, k3)};
     shapes[2] = new Polygon(p_pts, kPlgnPnts);
 
     std::cout << "--- BEFORE SCALING ---\n";
