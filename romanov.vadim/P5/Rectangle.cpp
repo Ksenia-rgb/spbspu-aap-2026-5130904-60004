@@ -1,12 +1,15 @@
-#include "Rectangle.h"
+#include "Rectangle.hpp"
 #include <algorithm>
 #include <cmath>
 #include <stdexcept>
 namespace romanov
 {
+  const double kEpsilon = 1e-9;
+  const double kTwo = 2.0;
+  const unsigned int kNumPoints = 4;
   bool isSamePoint(const point_t& a, const point_t& b)
   {
-    const double meas_err = 1e-9;
+    const double meas_err = kEpsilon;
     return (std::abs(a.getX() - b.getX()) < meas_err) && (std::abs(a.getY() - b.getY()) < meas_err);
   }
   Rectangle::Rectangle(point_t a, point_t b, point_t c, point_t d):
@@ -14,10 +17,10 @@ namespace romanov
     height_(0.0),
     pos_(0.0, 0.0)
   {
-    point_t pts[4] = {a, b, c, d};
-    for (int i = 0; i < 4; ++i)
+    const point_t pts[kNumPoints] = {a, b, c, d};
+    for (int i = 0; i < kNumPoints; ++i)
     {
-      for (int j = i + 1; j < 4; ++j)
+      for (int j = i + 1; j < kNumPoints; ++j)
       {
         if (isSamePoint(pts[i], pts[j]))
         {
@@ -25,28 +28,28 @@ namespace romanov
         }
       }
     }
-    double min_x = std::min({a.getX(), b.getX(), c.getX(), d.getX()});
-    double min_y = std::min({a.getY(), b.getY(), c.getY(), d.getY()});
-    double max_x = std::max({a.getX(), b.getX(), c.getX(), d.getX()});
-    double max_y = std::max({a.getY(), b.getY(), c.getY(), d.getY()});
+    const double min_x = std::min({a.getX(), b.getX(), c.getX(), d.getX()});
+    const double min_y = std::min({a.getY(), b.getY(), c.getY(), d.getY()});
+    const double max_x = std::max({a.getX(), b.getX(), c.getX(), d.getX()});
+    const double max_y = std::max({a.getY(), b.getY(), c.getY(), d.getY()});
     width_ = max_x - min_x;
     height_ = max_y - min_y;
-    const double meas_err = 1e-9;
+    const double meas_err = kEpsilon;
     if (width_ <= meas_err || height_ <= meas_err)
     {
       throw std::invalid_argument("Not an rectangle");
     }
-    for (int i = 0; i < 4; ++i)
+    for (int i = 0; i < kNumPoints; ++i)
     {
-      bool valid_x = (std::abs(pts[i].getX() - min_x) < meas_err) || (std::abs(pts[i].getX() - max_x) < meas_err);
-      bool valid_y = (std::abs(pts[i].getY() - min_y) < meas_err) || (std::abs(pts[i].getY() - max_y) < meas_err);
+      const bool valid_x = (std::abs(pts[i].getX() - min_x) < meas_err) || (std::abs(pts[i].getX() - max_x) < meas_err);
+      const bool valid_y = (std::abs(pts[i].getY() - min_y) < meas_err) || (std::abs(pts[i].getY() - max_y) < meas_err);
       if (!valid_x || !valid_y)
       {
         throw std::invalid_argument("Sides must be parallel to coordinate axes");
       }
     }
-    pos_.setX((min_x + max_x) / 2.0);
-    pos_.setY((min_y + max_y) / 2.0);
+    pos_.setX((min_x + max_x) / kTwo);
+    pos_.setY((min_y + max_y) / kTwo);
   }
 
   double Rectangle::getArea() const
@@ -64,8 +67,8 @@ namespace romanov
   }
   void Rectangle::move(const point_t& new_center)
   {
-    double dx = (new_center.getX() - pos_.getX());
-    double dy = (new_center.getY() - pos_.getY());
+    const double dx = (new_center.getX() - pos_.getX());
+    const double dy = (new_center.getY() - pos_.getY());
     move(dx, dy);
   }
   void Rectangle::scale(double k)

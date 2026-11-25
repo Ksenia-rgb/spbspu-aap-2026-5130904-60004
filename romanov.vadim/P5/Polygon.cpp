@@ -1,11 +1,14 @@
-#include "Polygon.h"
+#include "Polygon.hpp"
 #include <cmath>
 #include <stdexcept>
 #include <limits>
 
 namespace romanov
 {
-
+  const double kHalf = 0.5;
+  const double kEpsilon = 1e-9;
+  const double kSix = 6.0;
+  const double kTwo = 2.0;
   Polygon::Polygon(const point_t* vertices, unsigned int size):
     size_(size),
     pos_(0.0, 0.0)
@@ -59,19 +62,19 @@ namespace romanov
     double signed_area = 0.0, cx = 0.0, cy = 0.0;
     for (unsigned int i = 0; i < size_; ++i)
     {
-      unsigned int j = (i + 1) % size_;
-      double cross = vertices_[i].getX() * vertices_[j].getY() - vertices_[j].getX() * vertices_[i].getY();
+      const unsigned int j = (i + 1) % size_;
+      const double cross = vertices_[i].getX() * vertices_[j].getY() - vertices_[j].getX() * vertices_[i].getY();
       signed_area += cross;
       cx += (vertices_[i].getX() + vertices_[j].getX()) * cross;
       cy += (vertices_[i].getY() + vertices_[j].getY()) * cross;
     }
-    signed_area /= 2.0;
-    if (std::abs(signed_area) < 1e-9)
+    signed_area /= kTwo;
+    if (std::abs(signed_area) < kEpsilon)
     {
       throw std::invalid_argument("Degenerate polygon");
     }
-    pos_.setX(cx / (6.0 * signed_area));
-    pos_.setY(cy / (6.0 * signed_area));
+    pos_.setX(cx / (kSix * signed_area));
+    pos_.setY(cy / (kSix * signed_area));
   }
 
   double Polygon::getArea() const
@@ -82,7 +85,7 @@ namespace romanov
       unsigned int j = (i + 1) % size_;
       area += vertices_[i].getX() * vertices_[j].getY() - vertices_[j].getX() * vertices_[i].getY();
     }
-    return std::abs(area) / 2.0;
+    return std::abs(area) / kTwo;
   }
 
   rectangle_t Polygon::getFrameRect() const
@@ -111,7 +114,7 @@ namespace romanov
         max_y = vertices_[i].getY();
       }
     }
-    return rectangle_t(max_x - min_x, max_y - min_y, point_t((min_x + max_x) / 2.0, (min_y + max_y) / 2.0));
+    return rectangle_t(max_x - min_x, max_y - min_y, point_t((min_x + max_x) / kTwo, (min_y + max_y) / kTwo));
   }
 
   void Polygon::move(double dx, double dy)
