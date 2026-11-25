@@ -32,12 +32,22 @@ int main()
   }
   try
   {
-    const point_t r_pts[kRectPoints] = {point_t(kZero, kZero), point_t(kTwo, kZero), point_t(kTwo, kTwo), point_t(kZero, kTwo)};
+    const point_t r_pts[kRectPoints] = {point_t(kZero, kZero),
+      point_t(kTwo, kZero),
+      point_t(kTwo, kTwo),
+      point_t(kZero, kTwo)};
     shapes[0] = new Rectangle(r_pts[0], r_pts[1], r_pts[2], r_pts[kShapesCount]);
 
-    shapes[1] = new Complexquad(point_t(kZero, kZero), point_t(kFour, kFour), point_t(kFour, kZero), point_t(kZero, kFour));
+    shapes[1] = new Complexquad(point_t(kZero, kZero),
+                                point_t(kFour, kFour),
+                                point_t(kFour, kZero),
+                                point_t(kZero, kFour));
 
-    point_t p_pts[kPolygonPoints] = {point_t(kZero, kZero), point_t(kThree, kZero), point_t(kThree, kThree), point_t(kOnePointFive, kFour), point_t(kZero, kThree)};
+    point_t p_pts[kPolygonPoints] = {point_t(kZero, kZero),
+      point_t(kThree, kZero),
+      point_t(kThree, kThree),
+      point_t(kOnePointFive, kFour),
+      point_t(kZero, kThree)};
     shapes[2] = new Polygon(p_pts, kPolygonPoints);
 
     std::cout << "--- BEFORE SCALING ---\n";
