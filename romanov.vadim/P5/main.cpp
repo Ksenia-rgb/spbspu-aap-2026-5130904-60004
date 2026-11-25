@@ -10,21 +10,21 @@ namespace romanov
   void scaleRelativeToPoint(Shape* shape, const point_t& p, double k);
   void printInfo(Shape** shapes, unsigned int count);
   void freeShapes(Shape** shapes, unsigned int count);
-  const double kTwo = 2.0;
-  const double kThree = 3.0;
-  const double kFour = 4.0;
-  const double kOnePointFive = 1.5;
-  const double kZero = 0.0;
-  const unsigned int kShapesCount = 3;
-  const unsigned int kRectPoints = 4;
-  const unsigned int kPolygonPoints = 5;
+  const double k2 = 2.0;
+  const double k3 = 3.0;
+  const double k4 = 4.0;
+  const double k15 = 1.5;
+  const double k0 = 0.0;
+  const unsigned int kShpsCnt = 3;
+  const unsigned int kRctPints = 4;
+  const unsigned int kPlgnPnts = 5;
 
 }
 using namespace romanov;
 
 int main()
 {
-  const unsigned int SHAPES_COUNT = kShapesCount;
+  const unsigned int SHAPES_COUNT = kShpsCnt;
   Shape** const shapes = new Shape*[SHAPES_COUNT];
   for (unsigned int i = 0; i < SHAPES_COUNT; ++i)
   {
@@ -32,33 +32,33 @@ int main()
   }
   try
   {
-    const point_t r_pts[kRectPoints] = {
-      point_t(kZero, kZero),
-      point_t(kTwo, kZero),
-      point_t(kTwo, kTwo),
-      point_t(kZero, kTwo)};
-    shapes[0] = new Rectangle(r_pts[0], r_pts[1], r_pts[2], r_pts[kShapesCount]);
+    const point_t r_pts[kRctPints] = {
+      point_t(k0, k0),
+      point_t(k2, k0),
+      point_t(k2, k2),
+      point_t(k0, k2)};
+    shapes[0] = new Rectangle(r_pts[0], r_pts[1], r_pts[2], r_pts[kShpsCnt]);
 
     shapes[1] = new Complexquad(
-      point_t(kZero, kZero),
-      point_t(kFour, kFour),
-      point_t(kFour, kZero),
-      point_t(kZero, kFour));
+      point_t(k0, k0),
+      point_t(k4, k4),
+      point_t(k4, k0),
+      point_t(k0, k4));
 
-    point_t p_pts[kPolygonPoints] = {
-      point_t(kZero, kZero),
-      point_t(kThree, kZero),
-      point_t(kThree, kThree),
-      point_t(kOnePointFive, kFour),
-      point_t(kZero, kThree)};
-    shapes[2] = new Polygon(p_pts, kPolygonPoints);
+    point_t p_pts[kPlgnPnts] = {
+      point_t(k0, k0),
+      point_t(k3, k0),
+      point_t(k3, k3),
+      point_t(k15, k4),
+      point_t(k0, k3)};
+    shapes[2] = new Polygon(p_pts, kPlgnPnts);
 
     std::cout << "--- BEFORE SCALING ---\n";
     printInfo(shapes, SHAPES_COUNT);
 
-    double px = kZero;
-    double py = kZero;
-    double k = kZero;
+    double px = k0;
+    double py = k0;
+    double k = k0;
     std::cout << "Enter scale point (x y) and coefficient (k): ";
     if (!(std::cin >> px >> py >> k))
     {
@@ -67,7 +67,7 @@ int main()
       return 1;
     }
 
-    if (k <= kZero)
+    if (k <= k0)
     {
       std::cerr << "Error: coefficient must be positive\n";
       freeShapes(shapes, SHAPES_COUNT);
@@ -108,7 +108,7 @@ namespace romanov
 
   void printInfo(Shape** shapes, unsigned int count)
   {
-    double total_area = kZero;
+    double total_area = k0;
     double min_x = std::numeric_limits< double >::max();
     double min_y = std::numeric_limits< double >::max();
     double max_x = std::numeric_limits< double >::lowest();
@@ -124,10 +124,10 @@ namespace romanov
       std::cout << "Shape " << i + 1 << " frame rect: width=" << rect.getWidth() << ", height=" << rect.getHeight()
                 << ", pos=(" << rect.getPos().getX() << ", " << rect.getPos().getY() << ")\n";
 
-      const double r_min_x = rect.getPos().getX() - rect.getWidth() / kTwo;
-      const double r_min_y = rect.getPos().getY() - rect.getHeight() / kTwo;
-      const double r_max_x = rect.getPos().getX() + rect.getWidth() / kTwo;
-      const double r_max_y = rect.getPos().getY() + rect.getHeight() / kTwo;
+      const double r_min_x = rect.getPos().getX() - rect.getWidth() / k2;
+      const double r_min_y = rect.getPos().getY() - rect.getHeight() / k2;
+      const double r_max_x = rect.getPos().getX() + rect.getWidth() / k2;
+      const double r_max_y = rect.getPos().getY() + rect.getHeight() / k2;
 
       if (r_min_x < min_x)
       {
@@ -149,7 +149,7 @@ namespace romanov
 
     std::cout << "Total area: " << total_area << "\n";
     std::cout << "Global frame rect: width=" << (max_x - min_x) << ", height=" << (max_y - min_y) << ", pos=("
-              << ((min_x + max_x) / kTwo) << ", " << ((min_y + max_y) / kTwo) << ")\n\n";
+              << ((min_x + max_x) / k2) << ", " << ((min_y + max_y) / k2) << ")\n\n";
   }
 
   void freeShapes(Shape** shapes, unsigned int count)
