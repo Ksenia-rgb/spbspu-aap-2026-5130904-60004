@@ -82,7 +82,7 @@ namespace romanov
     double area = 0.0;
     for (unsigned int i = 0; i < size_; ++i)
     {
-      unsigned int j = (i + 1) % size_;
+      const unsigned int j = (i + 1) % size_;
       area += vertices_[i].getX() * vertices_[j].getY() - vertices_[j].getX() * vertices_[i].getY();
     }
     return std::abs(area) / kTwo;
