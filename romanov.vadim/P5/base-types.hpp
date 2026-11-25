@@ -15,7 +15,7 @@ public:
     return y_;
   }
   void setX(double x)
-  { 
+  {
     x_ = x;
   }
   void setY(double y)
