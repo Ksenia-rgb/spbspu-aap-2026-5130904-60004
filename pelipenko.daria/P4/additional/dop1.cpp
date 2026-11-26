@@ -8,7 +8,9 @@ namespace pelipenko
   class MyString
   {
   public:
-    MyString(): data_(new char[1]), size_(0)
+    MyString():
+      data_(new char[1]),
+      size_(0)
     {
       data_[0] = '\0';
     }
@@ -31,7 +33,9 @@ namespace pelipenko
       data_[size_] = '\0';
     }
 
-    MyString(const MyString &other): data_(new char[other.size_ + 1]), size_(other.size_)
+    MyString(const MyString &other):
+      data_(new char[other.size_ + 1]),
+      size_(other.size_)
     {
       for (std::size_t i = 0; i <= size_; ++i)
       {
@@ -39,7 +43,9 @@ namespace pelipenko
       }
     }
 
-    MyString(MyString &&other) noexcept: data_(other.data_), size_(other.size_)
+    MyString(MyString &&other) noexcept:
+      data_(other.data_),
+      size_(other.size_)
     {
       other.data_ = nullptr;
       other.size_ = 0;
