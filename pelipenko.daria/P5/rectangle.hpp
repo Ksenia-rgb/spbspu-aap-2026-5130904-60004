@@ -23,5 +23,6 @@ namespace pelipenko
     point_t center_;
   };
 
-} // namespace pelipenko
+}
+
 #endif

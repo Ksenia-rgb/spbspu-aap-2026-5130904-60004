@@ -31,6 +31,6 @@ namespace pelipenko
     int size_;
   };
 
-} // namespace pelipenko
+}
 
 #endif

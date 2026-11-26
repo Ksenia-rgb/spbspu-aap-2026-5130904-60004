@@ -17,5 +17,6 @@ namespace pelipenko
     point_t pos;
   };
 
-} // namespace pelipenko
+}
+
 #endif

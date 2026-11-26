@@ -9,11 +9,15 @@ namespace
 {
   constexpr int kMinVertices = 3;
   constexpr double kHalf = 2.0;
+}
 
 namespace pelipenko
 {
 
-  Polygon::Polygon(const point_t *vertices, int size) : centroid_{0.0, 0.0}, vertices_(nullptr), size_(size)
+  Polygon::Polygon(const point_t *vertices, int size):
+    centroid_{0.0, 0.0},
+    vertices_(nullptr),
+    size_(size)
   {
     if ((vertices == nullptr) || (size_ < kMinVertices))
     {
@@ -27,6 +31,7 @@ namespace pelipenko
       centroid_.x += vertices[i].x;
       centroid_.y += vertices[i].y;
     }
+
     centroid_.x /= size_;
     centroid_.y /= size_;
 
@@ -37,13 +42,18 @@ namespace pelipenko
     }
   }
 
-  Polygon::Polygon(const Polygon &other)
-      : centroid_(other.centroid_), vertices_(new point_t[other.size_]), size_(other.size_)
+  Polygon::Polygon(const Polygon &other):
+    centroid_(other.centroid_),
+    vertices_(new point_t[other.size_]),
+    size_(other.size_)
   {
     std::copy(other.vertices_, other.vertices_ + size_, vertices_);
   }
 
-  Polygon::Polygon(Polygon &&other) noexcept : centroid_{0.0, 0.0}, vertices_(nullptr), size_(0)
+  Polygon::Polygon(Polygon &&other) noexcept:
+    centroid_{0.0, 0.0},
+    vertices_(nullptr),
+    size_(0)
   {
     swap(other);
   }
@@ -92,20 +102,20 @@ namespace pelipenko
 
   rectangle_t Polygon::getFrameRect() const
   {
-    double min_x = vertices_[0].x;
-    double max_x = vertices_[0].x;
-    double min_y = vertices_[0].y;
-    double max_y = vertices_[0].y;
+    double minX = vertices_[0].x;
+    double maxX = vertices_[0].x;
+    double minY = vertices_[0].y;
+    double maxY = vertices_[0].y;
 
     for (int i = 1; i < size_; ++i)
     {
-      min_x = std::min(min_x, vertices_[i].x);
-      max_x = std::max(max_x, vertices_[i].x);
-      min_y = std::min(min_y, vertices_[i].y);
-      max_y = std::max(max_y, vertices_[i].y);
+      minX = std::min(minX, vertices_[i].x);
+      maxX = std::max(maxX, vertices_[i].x);
+      minY = std::min(minY, vertices_[i].y);
+      maxY = std::max(maxY, vertices_[i].y);
     }
 
-    return {max_x - min_x, max_y - min_y, {(min_x + max_x) / kHalf, (min_y + max_y) / kHalf}};
+    return {maxX - minX, maxY - minY, {(minX + maxX) / kHalf, (minY + maxY) / kHalf}};
   }
 
   void Polygon::move(const point_t &pos)
@@ -117,6 +127,7 @@ namespace pelipenko
   {
     centroid_.x += dx;
     centroid_.y += dy;
+
     for (int i = 0; i < size_; ++i)
     {
       vertices_[i].x += dx;
@@ -130,6 +141,7 @@ namespace pelipenko
     {
       throw std::invalid_argument("Polygon: factor must be > 0");
     }
+
     for (int i = 0; i < size_; ++i)
     {
       vertices_[i].x = centroid_.x + ((vertices_[i].x - centroid_.x) * factor);
@@ -137,4 +149,4 @@ namespace pelipenko
     }
   }
 
-} // namespace pelipenko
+}

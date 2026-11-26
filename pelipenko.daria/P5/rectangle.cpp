@@ -5,8 +5,10 @@
 namespace pelipenko
 {
 
-  Rectangle::Rectangle(double width, double height, const point_t &center)
-      : width_(width), height_(height), center_(center)
+  Rectangle::Rectangle(double width, double height, const point_t &center):
+    width_(width),
+    height_(height),
+    center_(center)
   {
     if ((width_ <= 0.0) || (height_ <= 0.0))
     {
@@ -41,8 +43,9 @@ namespace pelipenko
     {
       throw std::invalid_argument("Rectangle: factor must be > 0");
     }
+
     width_ *= factor;
     height_ *= factor;
   }
 
-} // namespace pelipenko
+}
