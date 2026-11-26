@@ -1,6 +1,6 @@
 #ifndef RECTANGLE_HPP
 #define RECTANGLE_HPP
-#include "shape.h"
+#include "shape.hpp"
 namespace semenets {
   class Rectangle: public Shape {
     rectangle_t rect_;

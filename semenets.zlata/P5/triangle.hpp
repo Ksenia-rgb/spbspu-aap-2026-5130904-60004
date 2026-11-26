@@ -1,6 +1,6 @@
 #ifndef TRIANGLE_HPP
 #define TRIANGLE_HPP
-#include "shape.h"
+#include "shape.hpp"
 
 namespace semenets {
   class Triangle: public Shape {

@@ -1,6 +1,6 @@
 #ifndef ELLIPSE_HPP
 #define ELLIPSE_HPP
-#include "shape.h"
+#include "shape.hpp"
 
 namespace semenets {
   class Ellipse: public Shape {
