@@ -12,8 +12,8 @@ namespace semenets {
     virtual void next(int value) = 0;
   };
 
-  struct countSignChanges: ISeqProperty {
-    countSignChanges();
+  struct CountSignChanges: ISeqProperty {
+    CountSignChanges();
   private:
     virtual size_t result() const override;
     virtual void next(int value) override;
@@ -33,14 +33,14 @@ namespace semenets {
     return next(value);
   }
 
-  countSignChanges::countSignChanges():
+  CountSignChanges::CountSignChanges():
     count_(0),
     count_num_(0),
     znak_past_(0),
     znak_new_(0)
   {}
 
-  void countSignChanges::next(int value)
+  void CountSignChanges::next(int value)
   {
     ++count_num_;
     if (value > 0) {
@@ -54,7 +54,7 @@ namespace semenets {
     znak_past_ = znak_new_;
   }
 
-  size_t countSignChanges::result() const
+  size_t CountSignChanges::result() const
   {
     return count_;
   }
@@ -62,8 +62,8 @@ namespace semenets {
 int main()
 {
   try {
-    semenets::countSignChanges counter_;
-    semenets::countSignChanges& counter = counter_;
+    semenets::CountSignChanges c;
+    semenets::CountSignChanges& counter = c;
 
     while (true) {
       int value = 0;

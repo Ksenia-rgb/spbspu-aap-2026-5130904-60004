@@ -95,7 +95,7 @@ namespace semenets {
   String& String::operator=(const String& other)
   {
     if (this != &other) {
-      char* s = new char[other.size_ + 1];
+      char* const s = new char[other.size_ + 1];
       for (size_t i = 0; i < other.size_; i++) {
         s[i] = other.data_[i];
       }
