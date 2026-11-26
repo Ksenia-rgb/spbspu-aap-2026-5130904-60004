@@ -23,4 +23,4 @@ private:
 
 }
 
-#endif #pragma once
+#endif
