@@ -26,7 +26,7 @@ namespace semenets {
     const double acx = c_.x - a_.x;
     const double acy = c_.y - a_.y;
 
-    return 0.5 * std::abs(abx * acy - aby * acx);
+    return std::abs(abx * acy - aby * acx) / 2;
   }
 
   rectangle_t Triangle::getFrameRect() const
@@ -35,7 +35,7 @@ namespace semenets {
     const double max_x = std::max({a_.x, b_.x, c_.x});
     const double min_y = std::min({a_.y, b_.y, c_.y});
     const double max_y = std::max({a_.y, b_.y, c_.y});
-    return {max_x - min_x, max_y - min_y, {(max_x - min_x) / 2.0, (max_y - min_y) / 2.0}};
+    return {max_x - min_x, max_y - min_y, {(max_x + min_x) / 2, (max_y + min_y) / 2}};
   }
 
   void Triangle::move(const point_t& pos)

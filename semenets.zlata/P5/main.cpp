@@ -91,7 +91,7 @@ void printAll(Shape** arr, size_t n)
     }
   }
   std::cout << "Total area: " << total_area << "\n";
-  printFrame({max_x - min_x, max_y - min_y, {(max_x + min_x) / 2.0, (max_y + min_y) / 2.0}});
+  printFrame({max_x - min_x, max_y - min_y, {(max_x + min_x) / 2.0, (max_y + min_y) / 2}});
 }
 
 void scaleOne(Shape* s, const point_t& p, double k)

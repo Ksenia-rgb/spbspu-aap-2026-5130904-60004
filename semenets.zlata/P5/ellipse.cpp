@@ -18,7 +18,7 @@ namespace semenets {
   }
   rectangle_t Ellipse::getFrameRect() const
   {
-    return {2.0 * rx_, 2.0 * ry_, center_};
+    return {2 * rx_, 2 * ry_, center_};
   }
   void Ellipse::move(const point_t& pos)
   {

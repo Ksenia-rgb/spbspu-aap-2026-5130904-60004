@@ -37,8 +37,11 @@ int main()
   try {
     const semenets::String literal("abc_ef");
     semenets::String str;
-    semenets::getLine(std::cin, str);
-    semenets::String result = semenets::uncSym(str, literal);
+    if (!semenets::getLine(std::cin, str)) {
+      std::cerr << "Error: no input\n";
+      return 1;
+    }
+    const semenets::String result = semenets::uncSym(str, literal);
     std::cout << result.data() << "\n";
   } catch (const std::bad_alloc&) {
     std::cerr << "Error: insufficient memory\n";
@@ -141,9 +144,9 @@ namespace semenets {
     if (pos > size_) {
       throw std::out_of_range("The string length is less then the position");
     }
-    size_t len_str_add = std::strlen(str);
-    size_t len_str = size_ + len_str_add;
-    char* new_str = new char[len_str + 1];
+    const size_t len_str_add = std::strlen(str);
+    const size_t len_str = size_ + len_str_add;
+    char* const new_str = new char[len_str + 1];
     for (size_t i = 0; i < pos; i++) {
       new_str[i] = data_[i];
     }
@@ -181,8 +184,8 @@ namespace semenets {
     if (end < start) {
       end = start;
     }
-    size_t new_size = size_ - (end - start);
-    char* str = new char[new_size + 1];
+    const size_t new_size = size_ - (end - start);
+    char* const str = new char[new_size + 1];
     for (size_t i = 0; i < start; i++) {
       str[i] = data_[i];
     }
