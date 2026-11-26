@@ -18,7 +18,7 @@ public:
 private:
   point_t center_;
   int sides_;
-  double sideLength_;
+  double side_Length_;
 };
 
 }
