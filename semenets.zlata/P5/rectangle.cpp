@@ -3,7 +3,7 @@
 
 namespace semenets {
   Rectangle::Rectangle(double width, double height, const point_t& center):
-    rect_(width, height, center)
+    rect_{width, height, center}
   {
     if (height <= 0.0 || width <= 0.0) {
       throw std::invalid_argument("Rectangle width and height must be positive");

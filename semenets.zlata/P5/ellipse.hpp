@@ -4,9 +4,9 @@
 
 namespace semenets {
   class Ellipse: public Shape {
+    point_t center_;
     double rx_;
     double ry_;
-    point_t center_;
   public:
     Ellipse(const point_t& center, double rx, double ry);
     double getArea() const override;
