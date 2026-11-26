@@ -31,4 +31,4 @@ void Rectangle::scale(double factor) {
   height_ *= factor;
 }
 
-}
+} // namespace pelipenko

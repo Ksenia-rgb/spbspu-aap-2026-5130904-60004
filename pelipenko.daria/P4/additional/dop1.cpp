@@ -39,7 +39,7 @@ public:
 
   MyString &operator=(const MyString &other) {
     if (this != &other) {
-      char *new_data = new char[other.size_ + 1];
+      char *const new_data = new char[other.size_ + 1];
       for (std::size_t i = 0; i <= other.size_; ++i) {
         new_data[i] = other.data_[i];
       }
@@ -65,7 +65,7 @@ public:
     if (pos > size_) {
       throw std::out_of_range("Index out of range");
     }
-    char *new_data = new char[size_ + 2];
+    char *const new_data = new char[size_ + 2];
     for (std::size_t i = 0; i < pos; ++i) {
       new_data[i] = data_[i];
     }
@@ -83,7 +83,7 @@ public:
     if (pos >= size_) {
       throw std::out_of_range("Index out of range");
     }
-    char *new_data = new char[size_];
+    char *const new_data = new char[size_];
     for (std::size_t i = 0, j = 0; i < size_; ++i) {
       if (i != pos) {
         new_data[j++] = data_[i];
@@ -99,7 +99,7 @@ public:
 
   const char &operator[](std::size_t index) const { return data_[index]; }
 
-  const char *c_str() const { return data_; }
+  const char *cStr() const { return data_; }
 
   const char *data() const { return data_; }
 
@@ -121,7 +121,7 @@ void getline(std::istream &in, MyString &str) {
 MyString getCommon(const MyString &str1, const MyString &str2) {
   MyString out;
   for (std::size_t i = 0; i < str2.size(); ++i) {
-    char ch = str2[i];
+    const char ch = str2[i];
     bool found = false;
     for (std::size_t j = 0; j < str1.size(); ++j) {
       if (str1[j] == ch) {
@@ -146,7 +146,7 @@ MyString getCommon(const MyString &str1, const MyString &str2) {
   for (std::size_t i = 0; i < out.size(); ++i) {
     for (std::size_t j = i + 1; j < out.size(); ++j) {
       if (out[i] > out[j]) {
-        char temp = out[i];
+        const char temp = out[i];
         out[i] = out[j];
         out[j] = temp;
       }
@@ -155,7 +155,7 @@ MyString getCommon(const MyString &str1, const MyString &str2) {
   return out;
 }
 
-}
+} // namespace pelipenko
 
 int main() {
   try {
@@ -171,8 +171,8 @@ int main() {
     }
 
     const pelipenko::MyString str2("def_ghk");
-    pelipenko::MyString res = pelipenko::getCommon(str1, str2);
-    std::cout << res.c_str() << "\n";
+    pelipenko::const MyString res = pelipenko::getCommon(str1, str2);
+    std::cout << res.cStr() << "\n";
 
     return 0;
   } catch (const std::exception &e) {

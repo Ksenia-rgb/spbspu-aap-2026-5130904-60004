@@ -16,6 +16,6 @@ public:
   virtual void scale(double factor) = 0;
 };
 
-}
+} // namespace pelipenko
 
 #endif

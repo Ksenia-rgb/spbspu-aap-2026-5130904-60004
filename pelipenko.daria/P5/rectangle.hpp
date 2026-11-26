@@ -21,6 +21,6 @@ private:
   point_t center_;
 };
 
-}
+} // namespace pelipenko
 
 #endif

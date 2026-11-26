@@ -25,7 +25,7 @@ void freeShapes(pelipenko::Shape **shapes, int count) {
     delete shapes[i];
   }
 }
-}
+} // namespace
 
 int main() {
   constexpr int shapeCount = 3;

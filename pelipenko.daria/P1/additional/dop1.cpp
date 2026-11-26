@@ -22,47 +22,47 @@ public:
 
 private:
   size_t result() const override {
-    if (!is_started) {
+    if (!is_started_) {
       throw std::invalid_argument("Input is not a sequence");
     }
-    return max_length;
+    return max_length_;
   }
 
   void next(int i) override {
-    curr = i;
+    curr_ = i;
 
-    if (!is_started) {
-      prev = curr;
-      length = 1;
-      max_length = 1;
-      is_started = true;
+    if (!is_started_) {
+      prev_ = curr_;
+      length_ = 1;
+      max_length_ = 1;
+      is_started_ = true;
       return;
     }
 
-    if (curr == prev) {
-      ++length;
+    if (curr_ == prev_) {
+      ++length_;
     } else {
-      length = 1;
-      prev = curr;
+      length_ = 1;
+      prev_ = curr_;
     }
 
-    if (length > max_length) {
-      max_length = length;
+    if (length_ > max_length_) {
+      max_length_ = length_;
     }
   }
 
-  long long prev = 0;
-  long long curr = 0;
-  int length = 0;
-  int max_length = 0;
-  bool is_started = false;
+  long long prev_ = 0;
+  long long curr_ = 0;
+  int length_ = 0;
+  int max_length_ = 0;
+  bool is_started_ = false;
 };
 
-}
+} // namespace pelipenko
 
 int main() {
   try {
-    pelipenko::ISeqProperty *prop = new pelipenko::MaxEqualRun();
+    pelipenko::ISeqProperty *const prop = new pelipenko::MaxEqualRun();
 
     int val = 0;
     bool has_elements = false;

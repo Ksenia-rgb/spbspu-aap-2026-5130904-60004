@@ -7,7 +7,7 @@
 namespace {
 constexpr int kMinVertices = 3;
 constexpr double kHalf = 2.0;
-}
+} // namespace
 
 namespace pelipenko {
 
@@ -89,8 +89,9 @@ rectangle_t Polygon::getFrameRect() const {
     max_y = std::max(max_y, vertices_[i].y);
   }
 
-  return {
-      max_x - min_x, max_y - min_y, {(min_x + max_x) / kHalf, (min_y + max_y) / kHalf}};
+  return {max_x - min_x,
+          max_y - min_y,
+          {(min_x + max_x) / kHalf, (min_y + max_y) / kHalf}};
 }
 
 void Polygon::move(const point_t &pos) {
@@ -116,4 +117,4 @@ void Polygon::scale(double factor) {
   }
 }
 
-}
+} // namespace pelipenko
