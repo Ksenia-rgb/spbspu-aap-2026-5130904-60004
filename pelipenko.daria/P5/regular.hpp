@@ -7,7 +7,7 @@ namespace pelipenko {
 
 class Regular : public Shape {
 public:
-  Regular(const point_t &center, int sides, double sideLength);
+  Regular(const point_t &center, int sides, double side_length);
 
   double getArea() const override;
   rectangle_t getFrameRect() const override;
@@ -18,7 +18,7 @@ public:
 private:
   point_t center_;
   int sides_;
-  double side_Length_;
+  double side_length_;
 };
 
 }
