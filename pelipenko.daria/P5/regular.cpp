@@ -4,14 +4,15 @@
 #include <stdexcept>
 
 namespace {
-constexpr int kMinSides = 3;
-constexpr double kHalf = 2.0;
-constexpr double kQuarter = 4.0;
-constexpr double kPi = 3.14159265358979323846;
+  constexpr int kMinSides = 3;
+  constexpr double kHalf = 2.0;
+  constexpr double kQuarter = 4.0;
+  constexpr double kPi = 3.14159265358979323846;
+}
 
 namespace pelipenko {
 
-Regular::Regular(const point_t &center, int sides, double side_length)
+Regular::Regular(const point_t& center, int sides, double side_length)
     : center_(center), sides_(sides), side_length_(side_length) {
   if (sides_ < kMinSides) {
     throw std::invalid_argument("Regular: sides must be >= 3");
@@ -22,22 +23,21 @@ Regular::Regular(const point_t &center, int sides, double side_length)
 }
 
 double Regular::getArea() const {
-  return (sides_ * side_length_ * side_length_) /
-         (kQuarter * std::tan(kPi / sides_));
+  return (sides_ * side_length_ * side_length_) / (kQuarter * std::tan(kPi / sides_));
 }
 
 rectangle_t Regular::getFrameRect() const {
   const double radius = side_length_ / (kHalf * std::sin(kPi / sides_));
-  const double angleStep = (kHalf * kPi) / sides_;
-  const double startAngle = (-kPi / kHalf) - (kPi / sides_);
+  const double angle_step = (kHalf * kPi) / sides_;
+  const double start_angle = (-kPi / kHalf) - (kPi / sides_);
 
-  double min_x = center_.x + (radius * std::cos(startAngle));
+  double min_x = center_.x + (radius * std::cos(start_angle));
   double max_x = min_x;
-  double min_y = center_.y + (radius * std::sin(startAngle));
+  double min_y = center_.y + (radius * std::sin(start_angle));
   double max_y = min_y;
 
   for (int i = 0; i < sides_; ++i) {
-    const double angle = startAngle + (i * angleStep);
+    const double angle = start_angle + (i * angle_step);
     const double vx = center_.x + (radius * std::cos(angle));
     const double vy = center_.y + (radius * std::sin(angle));
     min_x = std::min(min_x, vx);
@@ -46,12 +46,12 @@ rectangle_t Regular::getFrameRect() const {
     max_y = std::max(max_y, vy);
   }
 
-  return {max_x - min_x,
-          max_y - min_y,
-          {(min_x + max_x) / kHalf, (min_y + max_y) / kHalf}};
+  return {max_x - min_x, max_y - min_y, {(min_x + max_x) / kHalf, (min_y + max_y) / kHalf}};
 }
 
-void Regular::move(const point_t &pos) { center_ = pos; }
+void Regular::move(const point_t& pos) {
+  center_ = pos;
+}
 
 void Regular::move(double dx, double dy) {
   center_.x += dx;
@@ -65,3 +65,4 @@ void Regular::scale(double factor) {
   side_length_ *= factor;
 }
 
+}

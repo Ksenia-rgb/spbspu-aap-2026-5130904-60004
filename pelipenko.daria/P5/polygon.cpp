@@ -5,12 +5,13 @@
 #include <utility>
 
 namespace {
-constexpr int kMinVertices = 3;
-constexpr double kHalf = 2.0;
+  constexpr int kMinVertices = 3;
+  constexpr double kHalf = 2.0;
+}
 
 namespace pelipenko {
 
-Polygon::Polygon(const point_t *vertices, int size)
+Polygon::Polygon(const point_t* vertices, int size)
     : centroid_{0.0, 0.0}, vertices_(nullptr), size_(size) {
   if ((vertices == nullptr) || (size_ < kMinVertices)) {
     throw std::invalid_argument("Polygon: invalid vertices or size < 3");
@@ -31,20 +32,21 @@ Polygon::Polygon(const point_t *vertices, int size)
   }
 }
 
-Polygon::Polygon(const Polygon &other)
-    : centroid_(other.centroid_), vertices_(new point_t[other.size_]),
-      size_(other.size_) {
+Polygon::Polygon(const Polygon& other)
+    : centroid_(other.centroid_), vertices_(new point_t[other.size_]), size_(other.size_) {
   std::copy(other.vertices_, other.vertices_ + size_, vertices_);
 }
 
-Polygon::Polygon(Polygon &&other) noexcept
+Polygon::Polygon(Polygon&& other) noexcept
     : centroid_{0.0, 0.0}, vertices_(nullptr), size_(0) {
   swap(other);
 }
 
-Polygon::~Polygon() { delete[] vertices_; }
+Polygon::~Polygon() {
+  delete[] vertices_;
+}
 
-Polygon &Polygon::operator=(const Polygon &other) {
+Polygon& Polygon::operator=(const Polygon& other) {
   if (this != &other) {
     Polygon temp(other);
     swap(temp);
@@ -52,14 +54,14 @@ Polygon &Polygon::operator=(const Polygon &other) {
   return *this;
 }
 
-Polygon &Polygon::operator=(Polygon &&other) noexcept {
+Polygon& Polygon::operator=(Polygon&& other) noexcept {
   if (this != &other) {
     swap(other);
   }
   return *this;
 }
 
-void Polygon::swap(Polygon &other) noexcept {
+void Polygon::swap(Polygon& other) noexcept {
   std::swap(centroid_, other.centroid_);
   std::swap(vertices_, other.vertices_);
   std::swap(size_, other.size_);
@@ -69,8 +71,7 @@ double Polygon::getArea() const {
   double sum = 0.0;
   for (int i = 0; i < size_; ++i) {
     const int next = (i + 1) % size_;
-    sum += (vertices_[i].x * vertices_[next].y) -
-           (vertices_[next].x * vertices_[i].y);
+    sum += (vertices_[i].x * vertices_[next].y) - (vertices_[next].x * vertices_[i].y);
   }
   return std::abs(sum) / kHalf;
 }
@@ -88,12 +89,10 @@ rectangle_t Polygon::getFrameRect() const {
     max_y = std::max(max_y, vertices_[i].y);
   }
 
-  return {max_x - min_x,
-          max_y - min_y,
-          {(min_x + max_x) / kHalf, (min_y + max_y) / kHalf}};
+  return {max_x - min_x, max_y - min_y, {(min_x + max_x) / kHalf, (min_y + max_y) / kHalf}};
 }
 
-void Polygon::move(const point_t &pos) {
+void Polygon::move(const point_t& pos) {
   move(pos.x - centroid_.x, pos.y - centroid_.y);
 }
 
@@ -116,3 +115,4 @@ void Polygon::scale(double factor) {
   }
 }
 
+}
