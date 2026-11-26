@@ -102,20 +102,20 @@ namespace pelipenko
 
   rectangle_t Polygon::getFrameRect() const
   {
-    double minX = vertices_[0].x;
-    double maxX = vertices_[0].x;
-    double minY = vertices_[0].y;
-    double maxY = vertices_[0].y;
+    double min_x = vertices_[0].x;
+    double max_x = vertices_[0].x;
+    double min_y = vertices_[0].y;
+    double max_y = vertices_[0].y;
 
     for (int i = 1; i < size_; ++i)
     {
-      minX = std::min(minX, vertices_[i].x);
-      maxX = std::max(maxX, vertices_[i].x);
-      minY = std::min(minY, vertices_[i].y);
-      maxY = std::max(maxY, vertices_[i].y);
+      min_x = std::min(min_x, vertices_[i].x);
+      max_x = std::max(max_x, vertices_[i].x);
+      min_y = std::min(min_y, vertices_[i].y);
+      max_y = std::max(max_y, vertices_[i].y);
     }
 
-    return {maxX - minX, maxY - minY, {(minX + maxX) / kHalf, (minY + maxY) / kHalf}};
+    return {max_x - min_x, max_y - min_y, {(min_x + max_x) / kHalf, (min_y + max_y) / kHalf}};
   }
 
   void Polygon::move(const point_t &pos)

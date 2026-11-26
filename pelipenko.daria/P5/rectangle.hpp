@@ -6,7 +6,7 @@
 namespace pelipenko
 {
 
-  class Rectangle : public Shape
+  class Rectangle: public Shape
   {
   public:
     Rectangle(double width, double height, const point_t &center);

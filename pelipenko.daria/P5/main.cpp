@@ -10,20 +10,19 @@ namespace
   void printShapes(const pelipenko::Shape *const *shapes, int count, const char *title)
   {
     std::cout << title << '\n';
-    double totalArea = 0.0;
+    double total_area = 0.0;
 
     for (int i = 0; i < count; ++i)
     {
       const pelipenko::rectangle_t frame = shapes[i]->getFrameRect();
       const double area = shapes[i]->getArea();
-
-      std::cout << "Area: " << area
-                << " | Frame: " << frame.width << "x" << frame.height
-                << " at (" << frame.pos.x << ", " << frame.pos.y << ")\n";
-      totalArea += area;
+      std::cout << "Area: " << area << " | Frame: " << frame.width << "x"
+                << frame.height << " at (" << frame.pos.x << ", "
+                << frame.pos.y << ")\n";
+      total_area += area;
     }
 
-    std::cout << "Total Area: " << totalArea << '\n';
+    std::cout << "Total Area: " << total_area << '\n';
   }
 
   void freeShapes(pelipenko::Shape **shapes, int count)

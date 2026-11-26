@@ -6,7 +6,7 @@
 namespace pelipenko
 {
 
-  class Polygon : public Shape
+  class Polygon: public Shape
   {
   public:
     Polygon(const point_t *vertices, int size);
