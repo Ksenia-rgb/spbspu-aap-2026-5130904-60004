@@ -16,7 +16,7 @@ namespace semenets {
 
   point_t Triangle::center() const
   {
-    return {(a_.x + b_.x + c_.x) / 3, (a_.y + b_.y + c_.y / 3)};
+    return {(a_.x + b_.x + c_.x) / 3, (a_.y + b_.y + c_.y) / 3};
   }
 
   double Triangle::getArea() const
