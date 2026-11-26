@@ -155,7 +155,6 @@ MyString getCommon(const MyString &str1, const MyString &str2) {
   return out;
 }
 
-} // namespace pelipenko
 
 int main() {
   try {
@@ -171,7 +170,7 @@ int main() {
     }
 
     const pelipenko::MyString str2("def_ghk");
-    pelipenko::const MyString res = pelipenko::getCommon(str1, str2);
+    const pelipenko::MyString res = pelipenko::getCommon(str1, str2);
     std::cout << res.cStr() << "\n";
 
     return 0;

@@ -7,7 +7,6 @@
 namespace {
 constexpr int kMinVertices = 3;
 constexpr double kHalf = 2.0;
-} // namespace
 
 namespace pelipenko {
 
@@ -117,4 +116,3 @@ void Polygon::scale(double factor) {
   }
 }
 
-} // namespace pelipenko

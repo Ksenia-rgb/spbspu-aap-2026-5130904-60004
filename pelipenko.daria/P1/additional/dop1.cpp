@@ -58,7 +58,6 @@ private:
   bool is_started_ = false;
 };
 
-} // namespace pelipenko
 
 int main() {
   try {

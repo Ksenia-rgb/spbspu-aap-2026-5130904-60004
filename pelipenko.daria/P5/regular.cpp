@@ -8,7 +8,6 @@ constexpr int kMinSides = 3;
 constexpr double kHalf = 2.0;
 constexpr double kQuarter = 4.0;
 constexpr double kPi = 3.14159265358979323846;
-} // namespace
 
 namespace pelipenko {
 
@@ -66,4 +65,3 @@ void Regular::scale(double factor) {
   side_length_ *= factor;
 }
 
-} // namespace pelipenko

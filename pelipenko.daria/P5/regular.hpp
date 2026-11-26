@@ -21,6 +21,5 @@ private:
   double side_length_;
 };
 
-} // namespace pelipenko
 
 #endif

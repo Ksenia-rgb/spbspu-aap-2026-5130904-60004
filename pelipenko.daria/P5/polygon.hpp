@@ -29,6 +29,5 @@ private:
   int size_;
 };
 
-} // namespace pelipenko
 
 #endif

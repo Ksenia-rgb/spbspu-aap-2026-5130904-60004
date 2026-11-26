@@ -25,32 +25,31 @@ void freeShapes(pelipenko::Shape **shapes, int count) {
     delete shapes[i];
   }
 }
-} // namespace
 
 int main() {
-  constexpr int shapeCount = 3;
-  constexpr double rectWidth = 4.0;
-  constexpr double rectHeight = 2.0;
-  constexpr int triangleSize = 3;
-  constexpr int pentagonSides = 5;
-  constexpr double pentagonSide = 2.0;
+  constexpr int shape_count = 3;
+  constexpr double rect_width = 4.0;
+  constexpr double rect_height = 2.0;
+  constexpr int triangle_size = 3;
+  constexpr int pentagon_sides = 5;
+  constexpr double pentagon_side = 2.0;
 
-  pelipenko::Shape *shapes[shapeCount] = {nullptr, nullptr, nullptr};
+  pelipenko::Shape *shapes[shape_count] = {nullptr, nullptr, nullptr};
   int index = 0;
 
   try {
     shapes[index++] =
-        new pelipenko::Rectangle(rectWidth, rectHeight, {0.0, 0.0});
+        new pelipenko::Rectangle(rect_width, rect_height, {0.0, 0.0});
 
-    const pelipenko::point_t triangle[triangleSize] = {
+    const pelipenko::point_t triangle[triangle_size] = {
         {1.0, 1.0}, {5.0, 1.0}, {1.0, 4.0}};
-    shapes[index++] = new pelipenko::Polygon(triangle, triangleSize);
+    shapes[index++] = new pelipenko::Polygon(triangle, triangle_size);
 
     const pelipenko::point_t pentagonCenter = {-2.0, -2.0};
     shapes[index++] =
-        new pelipenko::Regular(pentagonCenter, pentagonSides, pentagonSide);
+        new pelipenko::Regular(pentagonCenter, pentagon_sides, pentagon_side);
 
-    printShapes(shapes, shapeCount, "=== BEFORE ===");
+    printShapes(shapes, shape_count, "=== BEFORE ===");
 
     double cx = 0.0;
     double cy = 0.0;
@@ -58,31 +57,31 @@ int main() {
 
     if (!(std::cin >> cx >> cy >> factor)) {
       std::cerr << "Error: invalid input\n";
-      freeShapes(shapes, shapeCount);
+      freeShapes(shapes, shape_count);
       return 1;
     }
 
     if (factor <= 0.0) {
       std::cerr << "Error: factor must be > 0\n";
-      freeShapes(shapes, shapeCount);
+      freeShapes(shapes, shape_count);
       return 1;
     }
 
-    for (int i = 0; i < shapeCount; ++i) {
+    for (int i = 0; i < shape_count; ++i) {
       shapes[i]->move(-cx, -cy);
       shapes[i]->scale(factor);
       shapes[i]->move(cx, cy);
     }
 
-    printShapes(shapes, shapeCount, "=== AFTER ===");
+    printShapes(shapes, shape_count, "=== AFTER ===");
 
   } catch (const std::exception &e) {
     std::cerr << "Error: " << e.what() << '\n';
-    freeShapes(shapes, shapeCount);
+    freeShapes(shapes, shape_count);
     return 2;
   }
 
-  freeShapes(shapes, shapeCount);
+  freeShapes(shapes, shape_count);
 
   std::cout << "Press Enter to exit...\n";
   std::cin.get();
