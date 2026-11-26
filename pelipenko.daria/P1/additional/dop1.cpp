@@ -24,9 +24,13 @@ namespace pelipenko
   class MaxEqualRun: public ISeqProperty
   {
   public:
-    MaxEqualRun(): prev_(0), curr_(0), length_(0), max_length_(0), is_started_(false)
-    {
-    }
+    MaxEqualRun():
+      prev_(0),
+      curr_(0),
+      length_(0),
+      max_length_(0),
+      is_started_(false)
+    {}
 
   private:
     size_t result() const override

@@ -16,9 +16,8 @@ namespace
     {
       const pelipenko::rectangle_t frame = shapes[i]->getFrameRect();
       const double area = shapes[i]->getArea();
-      std::cout << "Area: " << area << " | Frame: " << frame.width << "x"
-                << frame.height << " at (" << frame.pos.x << ", "
-                << frame.pos.y << ")\n";
+      std::cout << "Area: " << area << " | Frame: " << frame.width << "x" << frame.height;
+      std::cout << " at (" << frame.pos.x << ", " << frame.pos.y << ")\n";
       total_area += area;
     }
 
