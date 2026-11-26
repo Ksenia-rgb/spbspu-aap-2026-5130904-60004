@@ -1,8 +1,8 @@
+#include <iostream>
+#include <stdexcept>
 #include "polygon.hpp"
 #include "rectangle.hpp"
 #include "regular.hpp"
-#include <iostream>
-#include <stdexcept>
 
 namespace {
 void printShapes(const pelipenko::Shape *const *shapes, int count,
